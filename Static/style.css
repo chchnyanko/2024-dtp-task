@@ -1,6 +1,10 @@
 body {
-    color: red;
+    color: blue;
 }
 h1 {
     position: fixed;
+}
+div{
+    width: 10%;
+    background-color: red;
 }
