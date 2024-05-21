@@ -4,6 +4,26 @@ import sqlite3
 
 app = Flask(__name__)
 
+DB = "splatoon3.db"
+
+
+def connect_database_with_id(query, id):
+    conn = sqlite3.connect(DB)
+    cursor = conn.cursor()
+    cursor.execute(query, id)
+    results = cursor.fetchall()
+    conn.close()
+    return results
+
+
+def connect_database(query):
+    conn = sqlite3.connect(DB)
+    cursor = conn.cursor()
+    cursor.execute(query)
+    results = cursor.fetchall()
+    conn.close()
+    return results
+
 
 @app.route("/")
 def home():
@@ -27,7 +47,8 @@ def sub():
 
 @app.route("/special")
 def special():
-    return render_template("special.html")
+    weepon = connect_database("SELECT * FROM SpecialWeapon;")
+    return render_template("special.html", weepon=weepon)
 
 
 @app.route("/type")

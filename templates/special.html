@@ -1,4 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
+i am berry special
+<table class="data_table">
+    <th>Name</th>
+    <th>Damage</th>
+    <th>Number of attacks</th>
+    <th>Duration</th>
+    {% for specal in weepon %}
+    <tr>
+        <td>{{specal[1]}}</td>
+        <td>{{specal[2]}}</td>
+        <td>{{specal[3]}}</td>
+        <td>{{specal[4]}}</td>
+    </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}
