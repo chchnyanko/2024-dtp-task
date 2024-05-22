@@ -47,3 +47,19 @@
     text-align: center;
     border-collapse: collapse;
 }
+.main {
+    position: fixed;
+    left: 10%;
+    top: 20%;
+    width: 40%;
+    height: 60%;
+    border: 1px solid black;
+}
+.main_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.main_weapon {
+    height: 100px;
+    width: 100px;
+}

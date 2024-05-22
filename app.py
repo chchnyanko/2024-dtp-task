@@ -37,7 +37,8 @@ def all():
 
 @app.route("/main")
 def main():
-    return render_template("main.html")
+    weapon = connect_database("SELECT * FROM MainWeapon;")
+    return render_template("main.html", weapon=weapon)
 
 
 @app.route("/sub")
