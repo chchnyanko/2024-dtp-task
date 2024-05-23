@@ -63,15 +63,3 @@
     height: 100px;
     width: 100px;
 }
-.back_forward {
-    position: absolute;
-    bottom: 10px;
-}
-.back {
-    position: absolute;
-    left: 999px;
-}
-.forward {
-    position: absolute;
-    right: 10px;
-}
