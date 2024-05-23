@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 import sqlite3
 
 
@@ -7,19 +7,13 @@ app = Flask(__name__)
 DB = "splatoon3.db"
 
 
-def connect_database_with_id(query, id):
+def connect_database(query, id=None):
     conn = sqlite3.connect(DB)
     cursor = conn.cursor()
-    cursor.execute(query, id)
-    results = cursor.fetchall()
-    conn.close()
-    return results
-
-
-def connect_database(query):
-    conn = sqlite3.connect(DB)
-    cursor = conn.cursor()
-    cursor.execute(query)
+    if id:
+        cursor.execute(query, id)
+    else:
+        cursor.execute(query)
     results = cursor.fetchall()
     conn.close()
     return results
@@ -35,10 +29,17 @@ def all():
     return render_template("all.html")
 
 
+@app.route("/main/<int:page>")
+def main(page):
+    main_amount = 12
+    offset = (page-1)*main_amount
+    weapon = connect_database("SELECT * FROM MainWeapon LIMIT ? OFFSET ?;", (main_amount, offset))
+    return render_template("main.html", weapon=weapon, page=page)
+
+
 @app.route("/main")
-def main():
-    weapon = connect_database("SELECT * FROM MainWeapon;")
-    return render_template("main.html", weapon=weapon)
+def main_pppoopoo():
+    return redirect(url_for('main', page=1))
 
 
 @app.route("/sub")

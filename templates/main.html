@@ -2,10 +2,15 @@
 {% block content %}
 <div class="main">
     <div class="main_grid">
+        
+
         {% for mains in weapon %}
         <p class="main_weapon">{{mains[1]}}</p>
         {% endfor %}
     </div>
-    <button></button>
+    <div>
+        <p><a href="/main/{{page-1}}">back</a></p>
+        <p><a href="/main/{{page+1}}">next</a></p>
+    </div>
 </div>
 {% endblock %}
