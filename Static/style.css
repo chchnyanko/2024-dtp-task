@@ -1,3 +1,10 @@
+@font-face {
+    font-family: splatoon;
+    src: url(/static/Splatoon1.otf);
+}
+html {
+    font-family: splatoon;
+}
 .home {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -39,14 +46,13 @@
     height: 100px;
     text-align: center;
 }
-.all > table, td, th{
-    border: 1px solid black;
-    border-collapse: collapse;
-}
 .data_table {
     text-align: center;
     border-collapse: collapse;
 }
+
+
+
 .main {
     position: fixed;
     left: 10%;
@@ -58,8 +64,13 @@
 .main_grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 10px;
+    row-gap: 10px;
+    column-gap: 10px;
 }
 .main_weapon {
     height: 100px;
     width: 100px;
+    text-align: center;
+    border: 1px solid black;
 }
