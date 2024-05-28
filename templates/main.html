@@ -5,7 +5,10 @@
         
 
         {% for mains in weapon %}
-        <p class="main_weapon">{{mains[1]}}</p>
+        <div class="main_weapon">
+            <p>{{mains[1]}}</p>
+            <span class="dot"></span>
+        </div>
         {% endfor %}
     </div>
     <div>
