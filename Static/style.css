@@ -1,9 +1,12 @@
 @font-face {
     font-family: splatoon;
     src: url(/static/Splatoon1.otf);
+    
 }
 html {
+    transform: perspective(1300px) rotateY(20deg) translateZ(310px) scale(0.5);
     font-family: splatoon;
+    color: gray;
 }
 .home {
     display: grid;
@@ -52,32 +55,51 @@ html {
 }
 
 
-
+body {
+    background-color: #f0f0f0;
+}
 .main {
+    border-radius: 50px;
+    background-color: black;
     position: fixed;
-    left: 10%;
-    top: 20%;
-    width: 40%;
-    height: 60%;
+    left: 10vw;
+    top: 20vh;
+    width: 40vw;
+    height: 60vh;
     border: 1px solid black;
 }
 .main_grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 10px;
-    row-gap: 10px;
-    column-gap: 10px;
+    padding: 2vw;
+    row-gap: 1vw;
+    column-gap: 1vw;
 }
 .main_weapon {
-    height: 120px;
-    width: 120px;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #f0f0f0;
+    width: 7vw;
+    height: 7vw;
 }
-.dot {
-    height: 25px;
-    width: 25px;
-    background-color: #131313;
-    border-radius: 50%;
-    display: inline-block;
-  }
+.main_weapon_background {
+    position: relative;
+    border-radius: 10px;
+    background-color: white;
+    left: 10%;
+    top: 10%;
+    width: 80%;
+    padding-bottom: 80%;
+}
+.yellow_banner {
+    background-color: yellow;
+    position: relative;
+    width: 100%;
+    height: 30%;
+    top: 70%;
+}
+.main_image {
+    position: relative;
+    width: 6vw;
+    height: 6vw;
+    top: -15px;
+}
