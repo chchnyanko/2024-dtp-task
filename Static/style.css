@@ -4,7 +4,7 @@
     
 }
 html {
-    transform: perspective(1300px) rotateY(20deg) translateZ(310px) scale(0.5);
+    /* transform: perspective(1300px) rotateY(20deg) translateZ(310px) scale(0.5); */
     font-family: splatoon;
     color: gray;
 }
@@ -59,14 +59,13 @@ body {
     background-color: #f0f0f0;
 }
 .main {
-    border-radius: 50px;
+    border-radius: 10%;
     background-color: black;
     position: fixed;
     left: 10vw;
     top: 20vh;
     width: 40vw;
-    height: 60vh;
-    border: 1px solid black;
+    height: 40vh;
 }
 .main_grid {
     display: grid;
@@ -90,16 +89,43 @@ body {
     width: 80%;
     padding-bottom: 80%;
 }
+.main_image {
+    position: relative;
+    width: 6vw;
+    height: 6vw;
+    top: 10%;
+}
+.sub_image {
+    position: relative;
+    width: 2vw;
+    height: 2vw;
+    top: -56%;
+}
+.special_image {
+    position: relative;
+    width: 2vw;
+    height: 2vw;
+    top: -56%;
+}
 .yellow_banner {
     background-color: yellow;
     position: relative;
     width: 100%;
     height: 30%;
-    top: 70%;
+    top: -26%;
 }
-.main_image {
-    position: relative;
-    width: 6vw;
-    height: 6vw;
-    top: -15px;
+.back_button {
+    position: fixed;
+    top: 40vh;
+    left: 8%;
+    padding-left: 8px;
+    background-color: black;
+    clip-path: polygon(8px 100%,0 0,100% 0,100% 100%);
+}
+.next_button {
+    position: fixed;
+    top: 40vh;
+    right: 48vw;
+    padding-right: 8px;
+    background-color: black;
 }
