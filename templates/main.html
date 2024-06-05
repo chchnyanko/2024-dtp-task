@@ -1,21 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="main">
-    <div class="main_grid">
-        
-
-        {% for mains in weapon %}
-        <div class="main_weapon">
-            <!-- <div class="main_weapon_background"></div> -->
-            <img src="/static/main_weapon/splattershot.png" alt="Splattershot" class="main_image">
-            <div class="yellow_banner"></div>
-            <img src="/static/sub_weapon/suction bomb.png" alt="Suction Bomb" class="sub_image">
-            <img src="/static/special_weapon/trizooka.png" alt="Trizooka" class="special_image">
-            <!-- <p>{{mains[1]}}</p> -->
-        </div>
-        {% endfor %}
-    </div>
-    <div class="back_button"><a href="/main/{{page-1}}">back</a></div>
-    <div class="next_button"><a href="/main/{{page+1}}">next</a></div>
-</div>
+<table class="main">
+    <tr>
+        <th>Weapon Name</th>
+        <th>Main Weapon</th>
+        <th>Sub Weapon</th>
+        <th>Special Weapon</th>
+    </tr>
+    <tr>
+        <td>Splattershot</td>
+        <td>Splattershot</td>
+        <td>Suction Bomb</td>
+        <td>Trizooka</td>
+    </tr>
+</table>
 {% endblock %}

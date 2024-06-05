@@ -30,7 +30,7 @@ html {
     text-indent: 10px;
     padding: 50px;
 }
-.all {
+.all_link {
     background-color: azure;
     border-radius: 10px;
     height: 100px;
@@ -58,29 +58,29 @@ html {
 body {
     background-color: #f0f0f0;
 }
-.main {
-    border-radius: 10%;
+.all {
+    border-radius: 3vw;
     background-color: black;
     position: fixed;
     left: 10vw;
     top: 20vh;
     width: 40vw;
-    height: 40vh;
+    height: 60vh;
 }
-.main_grid {
+.all_grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 2vw;
     row-gap: 1vw;
     column-gap: 1vw;
 }
-.main_weapon {
+.all_weapon {
     text-align: center;
     border: 1px solid #f0f0f0;
     width: 7vw;
     height: 7vw;
 }
-.main_weapon_background {
+.all_weapon_background {
     position: relative;
     border-radius: 10px;
     background-color: white;

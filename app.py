@@ -24,17 +24,17 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/all")
-def all():
-    return render_template("all.html")
+@app.route("/main")
+def main():
+    return render_template("main.html")
 
 
-@app.route("/main/<int:page>")
-def main(page):
-    main_amount = 12
-    offset = (page-1)*main_amount
-    weapon = connect_database("SELECT * FROM MainWeapon LIMIT ? OFFSET ?;", (main_amount, offset))
-    return render_template("main.html", weapon=weapon, page=page)
+@app.route("/all/<int:page>")
+def all(page):
+    weapon_amount = 12
+    offset = (page-1)*weapon_amount
+    weapon = connect_database("SELECT * FROM Weapons LIMIT ? OFFSET ?;", (weapon_amount, offset))
+    return render_template("all.html", weapon=weapon, page=page)
 
 
 @app.route("/main")
