@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
 import sqlite3
 
+#added images from https://www.ikaclo.com/3/weapons/?sort=latest up to 34
 
 app = Flask(__name__)
 
