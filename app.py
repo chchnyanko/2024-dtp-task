@@ -1,8 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 import sqlite3
 
-#added images from https://www.ikaclo.com/3/weapons/?sort=latest up to 34
-
 app = Flask(__name__)
 
 DB = "splatoon3.db"
@@ -30,15 +28,18 @@ def main():
     return render_template("main.html")
 
 
-@app.route("/all/<int:page>")
-def all(page):
+@app.route("/all/<int:page>/<int:weaponID>")
+def all(page, weaponID):
     weapon_amount = 12
     offset = (page-1)*weapon_amount
     weapon = connect_database("SELECT * FROM Weapons LIMIT ? OFFSET ?;", (weapon_amount, offset))
-    return render_template("all.html", weapon=weapon, page=page)
+    selected_weapon = connect_database(f"SELECT * FROM Weapons WHERE WeaponID = '{weaponID}';")
+    if selected_weapon:
+        selected_weapon = selected_weapon[0]
+    return render_template("all.html", weapon=weapon, page=page, selected_weapon = selected_weapon)
 
 
-@app.route("/main")
+@app.route("/all")
 def main_pppoopoo():
     return redirect(url_for('main', page=1))
 

@@ -60,7 +60,7 @@ body {
 }
 .all {
     border-radius: 3vw;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     position: fixed;
     left: 10vw;
     top: 20vh;
@@ -68,7 +68,7 @@ body {
     height: 60vh;
 }
 .all_grid {
-    display: grid;
+    display: grid;  
     grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 2vw;
     row-gap: 1vw;
@@ -77,55 +77,58 @@ body {
 .all_weapon {
     text-align: center;
     border: 1px solid #f0f0f0;
+    background-color: rgb(30, 30, 30);
     width: 7vw;
     height: 7vw;
 }
-.all_weapon_background {
-    position: relative;
-    border-radius: 10px;
-    background-color: white;
-    left: 10%;
-    top: 10%;
-    width: 80%;
-    padding-bottom: 80%;
-}
 .main_image {
     position: relative;
-    width: 6vw;
-    height: 6vw;
-    top: 10%;
-}
-.sub_image {
-    position: relative;
-    width: 2vw;
-    height: 2vw;
-    top: -56%;
-}
-.special_image {
-    position: relative;
-    width: 2vw;
-    height: 2vw;
-    top: -56%;
+    width: 6.2vw;
+    height: 6.2vw;
+    top: 0.5vh;
 }
 .yellow_banner {
     background-color: yellow;
     position: relative;
     width: 100%;
-    height: 30%;
-    top: -26%;
+    height: 2vw;
+    top: -2vw;
+}
+.sub_image {
+    position: relative;
+    width: 2vw;
+    height: 2vw;
+}
+.special_image {
+    position: relative;
+    width: 2vw;
+    height: 2vw;
 }
 .back_button {
     position: fixed;
     top: 40vh;
-    left: 8%;
-    padding-left: 8px;
+    left: 4vw;
+    height: 5vh;
+    width: 5vw;
+    padding-left: 1vw;
     background-color: black;
-    clip-path: polygon(8px 100%,0 0,100% 0,100% 100%);
+    clip-path: polygon(1vw 100%,0 0,100% 0,100% 100%);
 }
 .next_button {
     position: fixed;
     top: 40vh;
-    right: 48vw;
-    padding-right: 8px;
+    right: 44vw;
+    height: 5vh;
+    width: 5vw;
+    padding-left: 1vw;
     background-color: black;
+    clip-path: polygon(0 0, 100% 0, 4vw 100%, 0% 100%);
+}
+.all_weapon_data {
+    position: fixed;
+    left: 60vw;
+    top: 20vh;
+    width: 30vw;
+    height: 60vh;
+    background-color: #aaaaaa;
 }
