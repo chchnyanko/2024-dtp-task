@@ -33,15 +33,13 @@ def all(page, weaponID):
     weapon_amount = 12
     offset = (page-1)*weapon_amount
     weapon = connect_database("SELECT * FROM Weapons LIMIT ? OFFSET ?;", (weapon_amount, offset))
+
     selected_weapon = connect_database(f"SELECT * FROM Weapons WHERE WeaponID = '{weaponID}';")
     if selected_weapon:
         selected_weapon = selected_weapon[0]
+    else:
+        selected_weapon.insert(0, 0)
     return render_template("all.html", weapon=weapon, page=page, selected_weapon = selected_weapon)
-
-
-@app.route("/all")
-def main_pppoopoo():
-    return redirect(url_for('main', page=1))
 
 
 @app.route("/sub")

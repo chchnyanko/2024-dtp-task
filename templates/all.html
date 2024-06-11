@@ -16,7 +16,7 @@
     </div>
     <div class="back_button"><a href="/all/{{page-1}}/{{selected_weapon[0]}}">back</a></div>
     <div class="next_button"><a href="/all/{{page+1}}/{{selected_weapon[0]}}">next</a></div>
-    {% if selected_weapon != none %}
+    {% if selected_weapon[0] != 0 %}
     <div class="all_weapon_data">
         <img src="/static/main_weapon/{{selected_weapon[1]}}.png" alt="{{selected_weapon[1]}}">
         <h1>{{selected_weapon[1]}}</h1>
