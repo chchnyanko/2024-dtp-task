@@ -58,6 +58,11 @@ def type():
     return render_template("type.html")
 
 
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("/404.html", error = e), 404

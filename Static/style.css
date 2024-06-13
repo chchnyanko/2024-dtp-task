@@ -1,7 +1,6 @@
 @font-face {
     font-family: splatoon;
     src: url(/static/Splatoon1.otf);
-    
 }
 html {
     font-family: splatoon;
