@@ -64,7 +64,8 @@ body {
     left: 10vw;
     top: 20vh;
     width: 40vw;
-    height: 60vh;
+    min-height: 60vh;
+    height: fit-content;
 }
 .all_grid {
     display: grid;  
@@ -125,9 +126,38 @@ body {
 }
 .all_weapon_data {
     position: fixed;
+    border-radius: 3vw;
     left: 60vw;
     top: 20vh;
     width: 30vw;
-    height: 60vh;
+    min-height: 60vh;
+    height: fit-content;
     background-color: #aaaaaa;
+}
+.all_weapon_name {
+    text-align: center;
+}
+.all_main_image {
+    position: relative;
+    width: 30%;
+    left: 35%;
+}
+.all_sub_image {
+    position: relative;
+    width: 20%;
+    left: 20%;
+}
+.all_special_image {
+    position: relative;
+    width: 20%;
+    left: 38%;
+}
+
+.navbar {
+    position: fixed;
+    top: 80%;
+    left: 10%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 }

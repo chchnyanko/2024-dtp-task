@@ -20,15 +20,15 @@
     </div>
     <div class="back_button"><a href="/all/{{page-1}}/{{selected_weapon[0]}}">back</a></div>
     <div class="next_button"><a href="/all/{{page+1}}/{{selected_weapon[0]}}">next</a></div>
-    {% if selected_weapon[0] != 0 %}
-    <div class="all_weapon_data">
-        <img src="/static/main_weapon/{{selected_weapon[1]}}.png" alt="{{selected_weapon[1]}}">
-        <h1>{{selected_weapon[1]}}</h1>
-        <img src="/static/sub_weapon/{{selected_weapon[3]}}.png" alt="{{selected_weapon[3]}}">
-        <img src="/static/special_weapon/{{selected_weapon[4]}}.png" alt="{{selected_weapon[4]}}">
-        <p>Required special points: {{selected_weapon[5]}}</p>
-        <p>Introduced Version: {{selected_weapon[6]}}</p>
-    </div>
-    {% endif %}
 </div>
+{% if selected_weapon[0] != 0 %}
+<div class="all_weapon_data">
+    <h1 class="all_weapon_name">{{selected_weapon[1]}}</h1>
+    <img src="/static/main_weapon/{{selected_weapon[1]}}.png" alt="{{selected_weapon[1]}}" class="all_main_image"><br>
+    <img src="/static/sub_weapon/{{selected_weapon[3]}}.png" alt="{{selected_weapon[3]}}" class="all_sub_image">
+    <img src="/static/special_weapon/{{selected_weapon[4]}}.png" alt="{{selected_weapon[4]}}" class="all_special_image">
+    <p style="text-align: center;">Required special points: {{selected_weapon[5]}}</p>
+    <p style="text-align: center;">Introduced Version: {{selected_weapon[6]}}</p>
+</div>
+{% endif %}
 {% endblock %}
