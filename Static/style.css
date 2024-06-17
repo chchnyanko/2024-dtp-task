@@ -161,3 +161,8 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
+.navbar_box {
+    height: 10vw;
+    width: 10vw;
+    background-color: #aaaaaa;
+}
