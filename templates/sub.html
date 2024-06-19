@@ -1,4 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-
+<div class="weapon_grid_background">
+    <div class="weapon_grid">
+        {% for weapon in weapon %}
+        <div class="all_weapon">
+            <img src="/static/sub_weapon/{{weapon[0]}}.png" alt="{{weapon[1]}}" class="main_image">
+        </div>
+        {% endfor %}
+    </div>
+    <div class="back_button"><a href="/sub/{{page-1}}">back</a></div>
+    <div class="next_button"><a href="/sub/{{page+1}}">next</a></div>
+</div>
 {% endblock %}

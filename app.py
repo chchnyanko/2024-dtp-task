@@ -23,9 +23,12 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/main")
-def main():
-    return render_template("main.html")
+@app.route("/main/<int:page>")
+def main(page):
+    weapon_amount = 12
+    offset = (page-1)*weapon_amount
+    weapon = connect_database("SELECT * FROM MainWeapon LIMIT ? OFFSET ?", (weapon_amount, offset))
+    return render_template("main.html", weapon=weapon, page=page)
 
 
 @app.route("/all/<int:page>/<int:weaponID>")
@@ -42,15 +45,20 @@ def all(page, weaponID):
     return render_template("all.html", weapon=weapon, page=page, selected_weapon = selected_weapon)
 
 
-@app.route("/sub")
-def sub():
-    return render_template("sub.html")
+@app.route("/sub/<int:page>")
+def sub(page):
+    weapon_amount = 12
+    offset = (page-1)*weapon_amount
+    weapon = connect_database("SELECT * FROM SubWeapon LIMIT ? OFFSET ?", (weapon_amount, offset))
+    return render_template("sub.html", weapon=weapon, page=page)
 
 
-@app.route("/special")
-def special():
-    weepon = connect_database("SELECT * FROM SpecialWeapon;")
-    return render_template("special.html", weepon=weepon)
+@app.route("/special/<int:page>")
+def special(page):
+    weapon_amount = 12
+    offset = (page-1)*weapon_amount
+    weapon = connect_database("SELECT * FROM SpecialWeapon LIMIT ? OFFSET ?", (weapon_amount, offset))
+    return render_template("special.html", weapon=weapon, page=page)
 
 
 @app.route("/type")

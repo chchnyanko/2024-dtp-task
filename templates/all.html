@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="all">
-    <div class="all_grid">
-        
-
+<div class="weapon_grid_background">
+    <div class="weapon_grid">
         {% for weapon in weapon %}
         <div class="all_weapon">
             {% if weapon[0] != selected_weapon[0] %}

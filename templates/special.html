@@ -1,18 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-<table class="data_table">
-    <th>Name</th>
-    <th>Damage</th>
-    <th>Number of attacks</th>
-    <th>Duration</th>
-    {% for specal in weepon %}
-    <tr>
-        <td>{{specal[1]}}</td>
-        <td>{{specal[2]}}</td>
-        <td>{{specal[3]}}</td>
-        <td>{{specal[4]}}</td>
-    </tr>
-    {% endfor %}
-</table>
-
+<div class="weapon_grid_background">
+    <div class="weapon_grid">
+        {% for weapon in weapon %}
+        <div class="all_weapon">
+            <img src="/static/special_weapon/{{weapon[0]}}.png" alt="{{weapon[1]}}" class="main_image">
+        </div>
+        {% endfor %}
+    </div>
+    <div class="back_button"><a href="/special/{{page-1}}">back</a></div>
+    <div class="next_button"><a href="/special/{{page+1}}">next</a></div>
+</div>
 {% endblock %}
