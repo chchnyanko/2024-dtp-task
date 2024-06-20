@@ -23,12 +23,18 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/main/<int:page>")
-def main(page):
+@app.route("/main/<int:page>/<int:weaponID>")
+def main(page, weaponID):
     weapon_amount = 12
     offset = (page-1)*weapon_amount
     weapon = connect_database("SELECT * FROM MainWeapon LIMIT ? OFFSET ?", (weapon_amount, offset))
-    return render_template("main.html", weapon=weapon, page=page)
+
+    selected_weapon = connect_database(f"SELECT * FROM MainWeapon WHERE MainWeaponID = '{weaponID}';")
+    if selected_weapon:
+        selected_weapon = selected_weapon[0]
+    else:
+        selected_weapon.insert(0, 0)
+    return render_template("main.html", weapon=weapon, page=page, selected_weapon=selected_weapon)
 
 
 @app.route("/all/<int:page>/<int:weaponID>")
