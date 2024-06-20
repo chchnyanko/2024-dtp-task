@@ -15,7 +15,6 @@ body {
     grid-template-columns: 1fr 3fr;
     gap: 10px 10px;
     padding: 10px;
-    border: 3px solid red;
     position: relative;
     height: fit-content;
 }
@@ -48,7 +47,7 @@ body {
 .link {
     background-color: coral;
     border-radius: 10px;
-    height: 100px;
+    height: 80px;
     text-align: center;
 }
 .data_table {
