@@ -4,7 +4,7 @@
 <a href="/admin_login"><p>{{message}}</p></a>
 {% else %}
 <div>
-    <form action="/admin" method="post">
+    <form action="/add_weapon" method="post">
         <label for="weapon_name">Weapon Name</label>
         <input type="text" name="weapon_name"><br>
         <label for="main_weapon">Main Weapon</label>
@@ -13,7 +13,7 @@
         <input type="text" name="sub_weapon"><br>
         <label for="special_weapon">Special Weapon</label>
         <input type="text" name="special_weapon"><br>   
-        <button type="submit">Submit</button>
+        <input type="submit" value="Submit">
     </form>
 </div>
 {% endif %}

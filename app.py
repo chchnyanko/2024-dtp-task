@@ -129,6 +129,20 @@ def admin():
     return render_template("admin.html", message=message)
 
 
+@app.post("/add_weapon")
+def add_weapon():
+    # print(request.form)
+    # print(request.form["weapon_name"])
+    weapon_name = request.form["weapon_name"]
+    main_weapon = request.form["main_weapon"]
+    sub_weapon = request.form["sub_weapon"]
+    special_weapon = request.form["special_weapon"]
+    query = "INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID) VALUES ('test', 1, 1, 1);"
+    # query = f"INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID) VALUES ('{weapon_name}',{int(main_weapon)},{int(sub_weapon)},{int(special_weapon)})"
+    connect_database(query)
+    return redirect("/")
+
+
 @app.route("/admin_login")
 def admin_login():
     return render_template("admin_login.html")
