@@ -11,7 +11,9 @@ LOGINDB = "login.db"
 
 app.config['SECRET_KEY'] = "MyReallySecretKey"
 
+
 def connect_database(query, id=None):
+    print(query)
     conn = sqlite3.connect(DB)
     cursor = conn.cursor()
     if id:
@@ -21,6 +23,18 @@ def connect_database(query, id=None):
     results = cursor.fetchall()
     conn.close()
     return results
+
+
+def commit_database(query, id=None):
+    print(query)
+    conn = sqlite3.connect(DB)
+    cursor = conn.cursor()
+    if id:
+        cursor.execute(query, id)
+    else:
+        cursor.execute(query)
+    cursor.commit()
+    return cursor.lastrowid
 
 
 def query_db(sql,args=(),one=False):
@@ -117,12 +131,13 @@ def admin():
         if user:
             #we got a user!!
             #check password matches-
-            if check_password_hash(user[1],password):
-                #we are logged in successfully
-                #Store the username in the session
-                session['user'] = user
-                message = "login successful"
-            else:
+            try:
+                if check_password_hash(user[1], password):
+                    #we are logged in successfully
+                    #Store the username in the session
+                    session['user'] = user
+                    message = "login successful"
+            except:
                 message = "login failed"
         else:
             message = "login failed"
@@ -131,15 +146,16 @@ def admin():
 
 @app.post("/add_weapon")
 def add_weapon():
-    # print(request.form)
-    # print(request.form["weapon_name"])
+    print(request.form)
+    print(request.form["weapon_name"])
     weapon_name = request.form["weapon_name"]
     main_weapon = request.form["main_weapon"]
     sub_weapon = request.form["sub_weapon"]
     special_weapon = request.form["special_weapon"]
-    query = "INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID) VALUES ('test', 1, 1, 1);"
+    query = '''INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID) 
+    VALUES ('test', 1, 1, 1);'''
     # query = f"INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID) VALUES ('{weapon_name}',{int(main_weapon)},{int(sub_weapon)},{int(special_weapon)})"
-    connect_database(query)
+    commit_database(query)
     return redirect("/")
 
 
