@@ -5,6 +5,18 @@
 {% else %}
 <div>
     <form action="/add_weapon" method="post">
+        <select name="update" id="update">
+            <option value="update">Update existing data</option>
+            <option value="add">Add to existing table</option>
+        </select>
+        <select name="table" id="table">
+            <option value="weapon">Weapon</option>
+            <option value="main">Main Weapon</option>
+            <option value="sub">Sub Weapon</option>
+            <option value="special">Special Weapon</option>
+        </select><br>
+        <label for="id">ID</label>
+        <input type="number" name="id"><br>
         <label for="weapon_name">Weapon Name</label>
         <input type="text" name="weapon_name"><br>
         <label for="main_weapon">Main Weapon</label>
@@ -13,6 +25,10 @@
         <input type="text" name="sub_weapon"><br>
         <label for="special_weapon">Special Weapon</label>
         <input type="text" name="special_weapon"><br>   
+        <label for="points">Required Spcieal Points</label>
+        <input type="number" name="points"><br>
+        <label for="version">Introduced Version</label>
+        <input type="number" name="version"><br>   
         <input type="submit" value="Submit">
     </form>
 </div>

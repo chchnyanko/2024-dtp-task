@@ -13,7 +13,6 @@ app.config['SECRET_KEY'] = "MyReallySecretKey"
 
 
 def connect_database(query, id=None):
-    print(query)
     conn = sqlite3.connect(DB)
     cursor = conn.cursor()
     if id:
@@ -26,14 +25,14 @@ def connect_database(query, id=None):
 
 
 def commit_database(query, id=None):
-    print(query)
     conn = sqlite3.connect(DB)
     cursor = conn.cursor()
     if id:
         cursor.execute(query, id)
     else:
         cursor.execute(query)
-    cursor.commit()
+    conn.commit()
+    conn.close()
     return cursor.lastrowid
 
 
@@ -77,8 +76,8 @@ def all(page, weaponID):
     if selected_weapon:
         selected_weapon = selected_weapon[0]
 
-        selected_weapon += (int(ceil(selected_weapon[2]/12)),)
-
+        if selected_weapon[2]:
+            selected_weapon += (int(ceil(int(selected_weapon[2])/12)),)
     else:
         selected_weapon = (0, 0)
     return render_template("all.html", weapon=weapon, page=page, selected_weapon = selected_weapon)
@@ -112,9 +111,9 @@ def special(page, weaponID):
     return render_template("special.html", weapon=weapon, page=page, selected_weapon=selected_weapon)
 
 
-@app.route("/type")
+@app.route("/games")
 def type():
-    return render_template("type.html")
+    return render_template("games.html")
 
 
 @app.route("/admin", methods=["GET","POST"])
@@ -147,14 +146,22 @@ def admin():
 @app.post("/add_weapon")
 def add_weapon():
     print(request.form)
-    print(request.form["weapon_name"])
+    update = request.form["update"]
+    table = request.form["table"]
+    id = request.form["id"]
     weapon_name = request.form["weapon_name"]
     main_weapon = request.form["main_weapon"]
+    main_weapon_id = connect_database(f"SELECT MainWeaponID FROM MainWeapon WHERE MainWeaponName = '{main_weapon}'")[0][0]
     sub_weapon = request.form["sub_weapon"]
+    sub_weapon_id = connect_database(f"SELECT SubWeaponID FROM SubWeapon WHERE SubWeaponName = '{sub_weapon}'")[0][0]
     special_weapon = request.form["special_weapon"]
-    query = '''INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID) 
-    VALUES ('test', 1, 1, 1);'''
-    # query = f"INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID) VALUES ('{weapon_name}',{int(main_weapon)},{int(sub_weapon)},{int(special_weapon)})"
+    special_weapon_id = connect_database(f"SELECT SpecialWeaponID FROM SpecialWeapon WHERE SpecialWeaponName = '{special_weapon}'")[0][0]
+    points = request.form["points"]
+    version = request.form["version"]
+    if update == "update":
+        query = f"UPDATE Weapons SET WeaponName = '{weapon_name}', MainWeaponID = '{main_weapon_id}', SubWeaponID = '{sub_weapon_id}', SpecialWeaponID = '{special_weapon_id}', SpecialPoint = '{points}', VersionID = '{version}' WHERE WeaponID = {id}"
+    else:
+        query = f"INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID, SpecialPoint, VersionID) VALUES ('{weapon_name}',{main_weapon_id},{sub_weapon_id},{special_weapon_id},{points},{version})"
     commit_database(query)
     return redirect("/")
 
