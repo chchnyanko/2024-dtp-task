@@ -16,8 +16,16 @@
         </div>
         {% endfor %}
     </div>
+    {% if page == 1 %}
+    <div class="back_button"><a href="/all/{{total_pages}}/{{selected_weapon[0]}}">back</a></div>
+    {% else %}
     <div class="back_button"><a href="/all/{{page-1}}/{{selected_weapon[0]}}">back</a></div>
+    {% endif %}
+    {% if page >= total_pages %}
+    <div class="next_button"><a href="/all/{{1}}/{{selected_weapon[0]}}">next</a></div>
+    {% else %}
     <div class="next_button"><a href="/all/{{page+1}}/{{selected_weapon[0]}}">next</a></div>
+    {% endif %}
 </div>
 {% if selected_weapon[0] != 0 %}
 <div class="all_weapon_data">

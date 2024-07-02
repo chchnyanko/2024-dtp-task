@@ -69,8 +69,13 @@ def main(page, weaponID):
 @app.route("/all/<int:page>/<int:weaponID>")
 def all(page, weaponID):
     weapon_amount = 12
-    offset = (page-1)*weapon_amount
-    weapon = connect_database("SELECT * FROM Weapons LIMIT ? OFFSET ?;", (weapon_amount, offset))
+    total_pages = ceil(connect_database("SELECT COUNT (*) FROM Weapons")[0][0] / 12)
+    if page <= total_pages:
+        offset = (page-1)*weapon_amount
+        weapon = connect_database("SELECT * FROM Weapons LIMIT ? OFFSET ?;", (weapon_amount, offset))
+    else:
+        offset = (total_pages - 1) * weapon_amount
+        weapon = connect_database("SELECT * FROM Weapons LIMIT ? OFFSET ?;", (weapon_amount, offset))
 
     selected_weapon = connect_database(f"SELECT * FROM Weapons WHERE WeaponID = '{weaponID}';")
     if selected_weapon:
@@ -80,7 +85,7 @@ def all(page, weaponID):
             selected_weapon += (int(ceil(int(selected_weapon[2])/12)),)
     else:
         selected_weapon = (0, 0)
-    return render_template("all.html", weapon=weapon, page=page, selected_weapon = selected_weapon)
+    return render_template("all.html", weapon=weapon, page=page, selected_weapon = selected_weapon, total_pages=total_pages)
 
 
 @app.route("/sub/<int:page>/<int:weaponID>")
@@ -188,7 +193,7 @@ def signup():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template("/404.html", error = e), 404
+    return render_template("/404.html", error=e), 404
 
 
 if __name__ == "__main__":
