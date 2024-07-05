@@ -1,0 +1,32 @@
+<div class="weapon_grid_background">
+    <div class="weapon_grid">
+        {% for weapon in weapons %}
+        <div class="all_weapon">
+            {% if weapon[0] != selected_weapon[0] %}
+            <a href="/{{title}}/{{page}}/{{weapon[0]}}"><img src="/static/{{title}}_weapon/{{weapon[1]}}.png" alt="{{weapon[1]}}" class="main_image"></a>
+            {% else %}
+            <a href="/{{title}}/{{page}}/0"><img src="/static/{{title}}_weapon/{{weapon[1]}}.png" alt="{{weapon[1]}}" class="main_image"></a>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% if page == 1 %}
+        <div class="back_button"><a href="/{{title}}/{{total_pages}}/{{selected_weapon[0]}}">back</a></div>
+        {% else %}
+        <div class="back_button"><a href="/{{title}}/{{page-1}}/{{selected_weapon[0]}}">back</a></div>
+        {% endif %}
+        {% if page >= total_pages %}
+        <div class="next_button"><a href="/{{title}}/{{1}}/{{selected_weapon[0]}}">next</a></div>
+        {% else %}
+        <div class="next_button"><a href="/{{title}}/{{page+1}}/{{selected_weapon[0]}}">next</a></div>
+        {% endif %}
+    </div>
+    {% if selected_weapon[0] != 0 %}
+    <div class="all_weapon_data">
+        <h1 class="all_weapon_name">{{selected_weapon[1]}}</h1>
+        <img src="/static/{{title}}_weapon/{{selected_weapon[1]}}.png" alt="">
+        {% for data in selected_weapon %}
+        <p>{{data}}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
