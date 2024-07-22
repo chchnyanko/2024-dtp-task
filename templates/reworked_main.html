@@ -1,6 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
+
 {% include "weapon_grid.html" %}
 {% block grid %}
 {% endblock %}
+
+{% if selected_weapon[0] != 0 %}
+    {% include "weapon_stats.html" %}
+    {% block weapon_stats %}
+    {% endblock %}
+{% endif %}
+
 {% endblock %}

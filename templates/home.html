@@ -1,25 +1,25 @@
-<img src="/static/other_images/22_HBD_Splatoon_1920_1080.jpg" alt="" style="position: fixed; width: 100%; height: 100%;">
+<img src="/static/other_images/22_HBD_Splatoon_1920_1080.jpg" class="home-background-img">
 {% extends "layout.html" %}
 {% block content %}
-<div>
-    <h1 class="title">Splatoon 3</h1>
+<div class="home-title">
+    <h1>Splatoon 3</h1>
 </div>
-<div class="home">
-    <div class="description">
+<div class="home-grid">
+    <div class="home-contents">
         <p>This web app is developed for a school class and therefore is for educational purposes only. </p>
     </div>
-    <div class="links">
-        <a href="/all/1/0"><div class="all_link">
-            <p>View all weapons and kits</p>
+    <div class="home-contents">
+        <a href="/all/1/0"><div>
+            <p class="home-link">View all weapons</p>
         </div></a>
-        <div class="weapon_types">
-            <a href="/main/1/0"><div class="link">
+        <div class="home-links-grid">
+            <a href="/main/1/0" class="home-link"><div>
                 <p>Main weapons</p>
             </div></a>
-            <a href="/sub/1/0"><div class="link">
+            <a href="/sub/1/0" class="home-link"><div>
                 <p>Sub weapons</p>
             </div></a>
-            <a href="/special/1/0"><div class="link">
+            <a href="/special/1/0" class="home-link"><div>
                 <p>Special weapons</p>
             </div></a>
         </div>

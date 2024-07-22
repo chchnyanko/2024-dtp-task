@@ -1,0 +1,153 @@
+@font-face {
+    font-family: splatoon;
+    src: url(/static/Splatoon1.otf);
+    font-size: large;
+}
+html {
+    font-family: splatoon;
+    color: white;
+}
+body {
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+/* general */
+
+
+/* navbar */
+.nav-bottom-bar {
+    position: fixed;
+    width: 100%;
+    height: 10%;
+    bottom: 0;
+    background-color: black;
+}
+.nav-navbar {
+    position: fixed;
+    top: 80%;
+    left: 10%;
+    width: 80%;
+    height: 20%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+.nav-navbar-box {
+    text-align: center;
+    width: 80%;
+    height: 0;
+    padding-bottom: 80%;
+    background-color: #aaaaaa;
+    border-radius: 10px;
+}
+
+/* /home */
+.home-title {
+    position: absolute;
+    top: 0;
+}
+.home-grid {
+    position: relative;
+    top: 20%;
+    height: 50%;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 30px;
+}
+.home-contents {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 30px;
+}
+.home-link {
+    text-align: center;
+    background-color: gray;
+    border-radius: 10px;
+    height: 100px;
+    width: 100%;
+}
+.home-links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.home-background-img {
+    position: absolute;
+    height:100%;
+    width: 100%;
+    z-index: -1;
+}
+
+/* weapon (used for all types of weapons) */
+.weapon-grid {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 40%;
+    min-width: 340px;
+    height: 60%;
+    background-color: black;
+    border-radius: 30px;
+    padding: 70px 10px 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+.weapon-img {
+    width: 100px;
+    height: 100px;
+}
+.weapon-back-button {
+    position: fixed;
+    left: calc(5% - 60px);
+    top: 35%;
+    background-color: black;
+    text-align: right;
+    width: 60px;
+    clip-path: polygon(10px 100%,0 0,100% 0,100% 100%);
+}
+.weapon-next-button {
+    position: fixed;
+    left: calc(45% + 20px);
+    top: 35%;
+    background-color: black;
+    text-align: left;
+    width: 60px;
+    clip-path: polygon(0 0, 100% 0, 50px 100%, 0 100%);
+}
+
+/* weapon data (used for the stats of the selected weapon) */
+.weapon-data-background {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    width: 40%;
+    height: 50%;
+    background-color: rgb(69, 69, 69);
+    border-radius: 30px;
+}
+.weapon-data-yellow-background {
+    position: relative;
+    top: -30px;
+    background-color: yellow;
+}
+.weapon-data-name {
+    left: 5px;
+    margin: 5px;
+    text-align: center;
+    background-color: black;
+    clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+}
+.weapon-data-grid {
+    position: relative;
+    top: -30px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 10px;
+    padding: 10px;
+}
+.weapon-data-img {
+    width: 100%;
+}

@@ -27,6 +27,15 @@ def connect_database(query, id=None):
     return results
 
 
+def get_columns(query):
+    db = sqlite3.connect(DB)
+    cursor = db.cursor()
+    cursor.execute(query)
+    results = [description[0] for description in cursor.description]
+    db.close()
+    return results
+
+
 def get_page(table, offset):
     query = "SELECT * FROM %.13s LIMIT ? OFFSET ?;" % (table)
     weapon = connect_database(query, (PAGESIZE, offset))
@@ -53,8 +62,13 @@ def main(page, weaponID):
     else:
         offset = (total_pages - 1) * PAGESIZE
     weapons = get_page("MainWeapon", offset)
-    selected_weapon = select_weapon("SELECT * FROM MainWeapon WHERE MainWeaponID = ?;", (weaponID, ))
-    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, title="main")
+    if weaponID != 0:
+        selected_weapon = select_weapon("SELECT * FROM MainWeapon WHERE MainWeaponID = ?;", (weaponID, ))
+        columns = get_columns("SELECT * FROM MainWeapon")
+    else:
+        selected_weapon = (0, 0)
+        columns = (0, 0)
+    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, columns = columns, title="main")
 
 
 @app.route("/sub/<int:page>/<int:weaponID>")
@@ -65,8 +79,13 @@ def sub(page, weaponID):
     else:
         offset = (total_pages - 1) * PAGESIZE
     weapons = get_page("SubWeapon", offset)
-    selected_weapon = select_weapon("SELECT * FROM SubWeapon WHERE SubWeaponID = ?;", (weaponID, ))
-    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, title="sub")
+    if weaponID != 0:
+        selected_weapon = select_weapon("SELECT * FROM SubWeapon WHERE SubWeaponID = ?;", (weaponID, ))
+        columns = get_columns("SELECT * FROM SubWeapon")
+    else:
+        selected_weapon = (0, 0)
+        columns = (0, 0)
+    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, columns=columns, title="sub")
 
 
 @app.route("/special/<int:page>/<int:weaponID>")
@@ -77,8 +96,32 @@ def special(page, weaponID):
     else:
         offset = (total_pages - 1) * PAGESIZE
     weapons = get_page("SpecialWeapon", offset)
-    selected_weapon = select_weapon("SELECT * FROM SpecialWeapon WHERE SpecialWeaponID = ?;", (weaponID, ))
-    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, title="special")
+    if weaponID != 0:
+        selected_weapon = select_weapon("SELECT * FROM SpecialWeapon WHERE SpecialWeaponID = ?;", (weaponID, ))
+        columns = get_columns("SELECT * FROM SpecialWeapon")
+    else:
+        selected_weapon = (0, 0)
+        columns = (0, 0)
+    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, columns=columns, title="special")
+
+
+@app.route("/all/<int:page>/<int:weaponID>")
+def all(page, weaponID):
+    total_pages = ceil(connect_database("SELECT COUNT (*) FROM Weapons")[0][0] / 12)
+    if page <= total_pages:
+        offset = (page - 1) * PAGESIZE
+    else:
+        offset = (total_pages - 1) * PAGESIZE
+    weapons = get_page("Weapons", offset)
+    if weaponID != 0:
+        selected_weapon = select_weapon("SELECT * FROM Weapons WHERE WeaponID = ?", (weaponID, ))
+        columns = get_columns("SELECT * FROM Weapons")
+        if selected_weapon[2]:
+            selected_weapon += (int(ceil(int(selected_weapon[2])/12)),)
+    else:
+        selected_weapon = (0, 0)
+        columns = (0, 0)
+    return render_template("all.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, columns=columns, title="all")
 
 
 if __name__ == "__main__":
