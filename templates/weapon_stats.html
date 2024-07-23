@@ -5,7 +5,12 @@
         </div>
     </div>
     <div class="weapon-data-grid">
-        <img src="/static/{{title}}_weapon/{{selected_weapon[1]}}.png" alt="{{selected_weapon[1]}}" class="weapon-data-img">
+        {% if title == "main" %}
+        {% set hello_levi = 1 %}
+        {% else %}
+        {% set hello_levi = 0 %}
+        {% endif %}
+        <img src="/static/{{title}}_weapon/{{selected_weapon[hello_levi]}}.png" alt="{{selected_weapon[1]}}" class="weapon-data-img">
         <div>
             {% for i in range(selected_weapon | length - 2) %}
             <p> {{columns[i + 2]}} {{selected_weapon[i + 2]}}</p>
