@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 import sqlite3
 from math import ceil
 
@@ -115,7 +115,8 @@ def all(page, weaponID):
     if weaponID != 0:
         selected_weapon = select_weapon("SELECT * FROM Weapons WHERE WeaponID = ?", (weaponID, ))
         columns = get_columns("SELECT * FROM Weapons")
-        if selected_weapon[2]:
+        print(selected_weapon)
+        if len(selected_weapon) > 2:
             selected_weapon += (int(ceil(int(selected_weapon[2])/12)),)
     else:
         selected_weapon = (0, 0)
@@ -125,16 +126,24 @@ def all(page, weaponID):
 
 @app.route("/admin_login", methods=["GET", "POST"])
 def admin_login():
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-        query = "SELECT password FROM Users WHERE username = ?"
-        correct_password = connect_database(query, (username,))[0][0]
-        if check_password_hash(correct_password, password):
-            print("password correct")
-            return render_template("admin.html")
-        else:
-            print("password incorrect")
+    try:
+        if request.method == "POST":
+            username = request.form["username"]
+            password = request.form["password"]
+            query = "SELECT password FROM Users WHERE username = ?"
+            print(connect_database(query, (username,)))
+            correct_password = connect_database(query, (username,))[0][0]
+            if check_password_hash(correct_password, password):
+                print("password correct")
+                main_query = "SELECT MainWeaponName FROM MainWeapon"
+                mains = connect_database(main_query)
+                sub_query = "SELECT SubWeaponName FROM SubWeapon"
+                subs = connect_database(sub_query)
+                speical_query = "SELECT SpecialWeaponName FROM SpecialWeapon"
+                specials = connect_database(speical_query)
+                return render_template("admin.html", main_weapons=mains, sub_weapons=subs, special_weapons=specials)
+    except:
+        flash("Username or Password is Incorrect")
     return render_template("admin_login.html")
 
 
@@ -144,19 +153,25 @@ def add_weapon():
     update = request.form["update"]
     table = request.form["table"]
     id = request.form["id"]
+
     weapon_name = request.form["weapon_name"]
     main_weapon = request.form["main_weapon"]
-    main_weapon_id = connect_database(f"SELECT MainWeaponID FROM MainWeapon WHERE MainWeaponName = '{main_weapon}'")[0][0]
+
+    main_weapon_id = connect_database("SELECT MainWeaponID FROM MainWeapon WHERE MainWeaponName = ?", (main_weapon,))[0][0]
     sub_weapon = request.form["sub_weapon"]
-    sub_weapon_id = connect_database(f"SELECT SubWeaponID FROM SubWeapon WHERE SubWeaponName = '{sub_weapon}'")[0][0]
+    sub_weapon_id = connect_database("SELECT SubWeaponID FROM SubWeapon WHERE SubWeaponName = ?", (sub_weapon,))[0][0]
     special_weapon = request.form["special_weapon"]
-    special_weapon_id = connect_database(f"SELECT SpecialWeaponID FROM SpecialWeapon WHERE SpecialWeaponName = '{special_weapon}'")[0][0]
+    special_weapon_id = connect_database("SELECT SpecialWeaponID FROM SpecialWeapon WHERE SpecialWeaponName = ?", (special_weapon, ))[0][0]
+    
     points = request.form["points"]
     version = request.form["version"]
     if update == "update":
         query = f"UPDATE Weapons SET WeaponName = '{weapon_name}', MainWeaponID = '{main_weapon_id}', SubWeaponID = '{sub_weapon_id}', SpecialWeaponID = '{special_weapon_id}', SpecialPoint = '{points}', VersionID = '{version}' WHERE WeaponID = {id}"
-    else:
+    elif update == "add":
         query = f"INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID, SpecialPoint, VersionID) VALUES ('{weapon_name}',{main_weapon_id},{sub_weapon_id},{special_weapon_id},{points},{version})"
+    elif update == "delete":
+        query = f"DELETE FROM Weapons WHERE WeaponID = {id}"
+    print(query)
     connect_database(query)
     return redirect("/")
 

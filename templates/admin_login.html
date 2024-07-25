@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1>Login to access the admin page</h1>
+{% with error = get_flashed_messages() %}
+{{error[0]}}
+{% endwith %}
 <form action="/admin_login" method="post">
     <label for="username">Username</label>
     <input type="text" name="username">
