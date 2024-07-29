@@ -151,3 +151,22 @@ body {
 .weapon-data-img {
     width: 100%;
 }
+
+/* all (used by the all page) */
+.all-yellow_bar {
+    background-color: yellow;
+    position: relative;
+    width: 100px;
+    height: 40px;
+    top: -40px;
+}
+.all-sub-img {
+    position: relative;
+    width: 40px;
+    left: 5px
+}
+.all-special-img {
+    position: relative;
+    width: 40px;
+    left :5px;
+}

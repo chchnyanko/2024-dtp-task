@@ -166,13 +166,14 @@ def add_weapon():
     points = request.form["points"]
     version = request.form["version"]
     if update == "update":
-        query = f"UPDATE Weapons SET WeaponName = '{weapon_name}', MainWeaponID = '{main_weapon_id}', SubWeaponID = '{sub_weapon_id}', SpecialWeaponID = '{special_weapon_id}', SpecialPoint = '{points}', VersionID = '{version}' WHERE WeaponID = {id}"
+        query = "UPDATE Weapons SET WeaponName = ?, MainWeaponID = ?, SubWeaponID = ?, SpecialWeaponID = ?, SpecialPoint = ?, VersionID = ? WHERE WeaponID = ?"
+        connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version, id))
     elif update == "add":
-        query = f"INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID, SpecialPoint, VersionID) VALUES ('{weapon_name}',{main_weapon_id},{sub_weapon_id},{special_weapon_id},{points},{version})"
+        query = "INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID, SpecialPoint, VersionID) VALUES (?,?,?,?,?,?)"
+        connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version))
     elif update == "delete":
-        query = f"DELETE FROM Weapons WHERE WeaponID = {id}"
-    print(query)
-    connect_database(query)
+        query = "DELETE FROM Weapons WHERE WeaponID = ?"
+        connect_database(query, (id, ))
     return redirect("/")
 
 

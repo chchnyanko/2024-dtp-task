@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
-<head><link rel="stylesheet" type="text/css" href="/static/style.css"></head>
+<!-- <head><link rel="stylesheet" type="text/css" href="/static/style.css"></head> -->
 <div class="weapon-grid">
     {% for weapon in weapons %}
     <div>
         {% if weapon[0] != selected_weapon[0] %}
-        <a href="/all/{{page}}/{{weapon[0]}}"><img src="/static/main_weapon/{{weapon[1]}}.png" alt="{{weapon[1]}}" class="weapon-img"></a>
+        <a href="/all/{{page}}/{{weapon[0]}}"><img src="/static/main_weapon/{{weapon[1]}}.png" alt="{{weapon[1]}}" class="weapon-img" onerror="this.onerror=null;this.src='/static/other_images/loading.gif'"></a>
         {% else %} 
-        <a href="/all/{{page}}/0"><img src="/static/main_weapon/{{weapon[1]}}.png" alt="{{weapon[1]}}" class="weapon-img"></a>
+        <a href="/all/{{page}}/0"><img src="/static/main_weapon/{{weapon[1]}}.png" alt="{{weapon[1]}}" class="weapon-img" onerror="this.onerror=null;this.src='/static/other_images/loading.gif'"></a>
         {% endif %}
-        <div class="yellow_banner">
-            <img src="/static/sub_weapon/{{weapon[3]}}.png" alt="{{weapon[3]}}" class="sub_image">
-            <img src="/static/special_weapon/{{weapon[4]}}.png" alt="{{weapon[4]}}" class="special_image">
+        <div class="all-yellow_bar">
+            <img src="/static/sub_weapon/{{weapon[3]}}.png" alt="{{weapon[3]}}" class="all-sub-img">
+            <img src="/static/special_weapon/{{weapon[4]}}.png" alt="{{weapon[4]}}" class="all-special-img">
         </div>
     </div>
     {% endfor %}
@@ -26,6 +26,7 @@
 {% else %}
 <div class="weapon-next-button"><a href="/all/{{page+1}}/{{selected_weapon[0]}}">next</a></div>
 {% endif %}
+
 {% if selected_weapon[0] != 0 %}
 <div class="weapon-data-background">
     <div class="weapon-data-yellow-background">

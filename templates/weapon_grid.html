@@ -2,14 +2,14 @@
     {% for weapon in weapons %}
     <div {{weapon[1]}}>
         {% if title == "main" %}
-        {% set hello_levi = 1 %}
+        {% set image = weapon[1] %}
         {% else %}
-        {% set hello_levi = 0 %}
+        {% set image = weapon[0] %}
         {% endif %}
         {% if weapon[0] != selected_weapon[0] %}
-        <a href="/{{title}}/{{page}}/{{weapon[0]}}"><img src="/static/{{title}}_weapon/{{weapon[hello_levi]}}.png" alt="{{weapon[1]}}" class="weapon-img"></a>
+        <a href="/{{title}}/{{page}}/{{weapon[0]}}"><img src="/static/{{title}}_weapon/{{image}}.png" alt="{{weapon[1]}}" class="weapon-img" onerror="this.onerror=null;this.src='/static/other_images/loading.gif'"></a>
         {% else %}
-        <a href="/{{title}}/{{page}}/0"><img src="/static/{{title}}_weapon/{{weapon[hello_levi]}}.png" alt="{{weapon[1]}}" class="weapon-img"></a>
+        <a href="/{{title}}/{{page}}/0"><img src="/static/{{title}}_weapon/{{image}}.png" alt="{{weapon[1]}}" class="weapon-img" onerror="this.onerror=null;this.src='/static/other_images/loading.gif'"></a>
         {% endif %}
     </div>
     {% endfor %}
