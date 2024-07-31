@@ -115,9 +115,11 @@ def all(page, weaponID):
     if weaponID != 0:
         selected_weapon = select_weapon("SELECT * FROM Weapons WHERE WeaponID = ?", (weaponID, ))
         columns = get_columns("SELECT * FROM Weapons")
-        print(selected_weapon)
+        print("hello", selected_weapon)
         if len(selected_weapon) > 2:
             selected_weapon += (int(ceil(int(selected_weapon[2])/12)),)
+            selected_weapon += (connect_database("SELECT SubWeaponName FROM SubWeapon WHERE SubWeaponID = ?", (selected_weapon[3], ))[0][0],)
+            selected_weapon += (connect_database("SELECT SpecialWeaponName FROM SpecialWeapon WHERE SpecialWeaponID = ?", (selected_weapon[4], ))[0][0],)
     else:
         selected_weapon = (0, 0)
         columns = (0, 0)
