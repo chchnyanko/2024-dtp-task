@@ -15,17 +15,17 @@
         </div>
     </div>
     {% endfor %}
+    {% if page == 1 %}
+    <div class="weapon-back-button"><a href="/all/{{total_pages}}/{{selected_weapon[0]}}">back</a></div>
+    {% else %}
+    <div class="weapon-back-button"><a href="/all/{{page-1}}/{{selected_weapon[0]}}">back</a></div>
+    {% endif %}
+    {% if page >= total_pages %}
+    <div class="weapon-next-button"><a href="/all/{{1}}/{{selected_weapon[0]}}">next</a></div>
+    {% else %}
+    <div class="weapon-next-button"><a href="/all/{{page+1}}/{{selected_weapon[0]}}">next</a></div>
+    {% endif %}
 </div>
-{% if page == 1 %}
-<div class="weapon-back-button"><a href="/all/{{total_pages}}/{{selected_weapon[0]}}">back</a></div>
-{% else %}
-<div class="weapon-back-button"><a href="/all/{{page-1}}/{{selected_weapon[0]}}">back</a></div>
-{% endif %}
-{% if page >= total_pages %}
-<div class="weapon-next-button"><a href="/all/{{1}}/{{selected_weapon[0]}}">next</a></div>
-{% else %}
-<div class="weapon-next-button"><a href="/all/{{page+1}}/{{selected_weapon[0]}}">next</a></div>
-{% endif %}
 
 {% if selected_weapon[0] != 0 %}
 <div class="weapon-data-background">
@@ -37,18 +37,18 @@
     <div class="weapon-data-grid">
         <a href="/main/{{selected_weapon[7]}}/{{selected_weapon[2]}}"><img src="/static/main_weapon/{{selected_weapon[1]}}.png" alt="{{selected_weapon[1]}}" class="weapon-data-img"></a>
         <div>
-            <a href="/sub/1/{{selected_weapon[3]}}"><div>
+            <a href="/sub/1/{{selected_weapon[3]}}"><div class="all-data-black-box">
                 <img src="/static/sub_weapon/{{selected_weapon[3]}}.png" alt="{{selected_weapon[3]}}" class="all-data-sub-img">
-                <p>{{selected_weapon[8]}}</p>
+                <span class="all-data-text">{{selected_weapon[8]}}</span>
             </div></a>
-            <a href="/special/1/{{selected_weapon[4]}}"><div>
+            <a href="/special/1/{{selected_weapon[4]}}"><div class="all-data-black-box">
                 <img src="/static/special_weapon/{{selected_weapon[4]}}.png" alt="{{selected_weapon[4]}}" class="all-data-special-img">
-                <p>{{selected_weapon[9]}}</p>
+                <span class="all-data-text">{{selected_weapon[9]}}</span>
             </div></a>
             <p>Introduced Version: {{selected_weapon[6]}}</p>
         </div>
     </div>
-    <p style="background-color: black; position: inherit; bottom: -30px; height: 50px; width: 100%;">Points for special {{selected_weapon[5]}}p</p>
+    <p class="all-data-special-points">Points for Special: {{selected_weapon[5]}}p</p>
 </div>
 {% endif %}
 {% endblock %}

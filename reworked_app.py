@@ -48,6 +48,7 @@ def select_weapon(query, weaponid):
     except:
         return (0, 0)
 
+
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -188,6 +189,7 @@ def signup():
         query = "INSERT INTO Users (Username, Password) VALUES (?,?)"
         connect_database(query, (username, hashed_password))
     return render_template("signup.html")
+
 
 @app.errorhandler(404)
 def page_not_found(e):

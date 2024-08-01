@@ -12,6 +12,10 @@ body {
     background-color: #f0f0f0;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* general */
 
 
@@ -94,6 +98,7 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 20px;
+    transform: perspective(1300px) rotateY(10deg) translateZ(10px);
 }
 .weapon-img {
     width: 100px;
@@ -101,7 +106,7 @@ body {
 }
 .weapon-back-button {
     position: fixed;
-    left: calc(5% - 60px);
+    left: -59px;
     top: 35%;
     background-color: black;
     text-align: right;
@@ -110,7 +115,7 @@ body {
 }
 .weapon-next-button {
     position: fixed;
-    left: calc(45% + 20px);
+    left: calc(100% - 1px);
     top: 35%;
     background-color: black;
     text-align: left;
@@ -127,6 +132,7 @@ body {
     height: 45%;
     background-color: rgb(69, 69, 69);
     border-radius: 30px;
+    transform: perspective(1300px) rotateY(-10deg) translateZ(10px);
 }
 .weapon-data-yellow-background {
     position: relative;
@@ -172,10 +178,28 @@ body {
 }
 
 /* all data (used by the selected weapon in the all page) */
+.all-data-black-box {
+    background-color: black;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    width: 80%;
+    height: 90px;
+}
 .all-data-sub-img {
     width: 90px;
-    padding-bottom: 10px;
 }
 .all-data-special-img {
     width: 90px;
+}
+.all-data-text {
+    position: relative;
+    top: -40px;
+}
+.all-data-special-points {
+    background-color: black;
+    position: inherit;
+    padding-left: 20px;
+    bottom: -30px;
+    height: 50px;
+    width: calc(100% - 20px);
 }
