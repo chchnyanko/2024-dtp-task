@@ -34,16 +34,21 @@ a {
     width: 80%;
     height: 20%;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
 }
 .nav-navbar-box {
     text-align: center;
-    width: 80%;
-    height: 0;
+    width: 100px;
+    height: 100px;
     padding-bottom: 80%;
     background-color: #aaaaaa;
     border-radius: 10px;
+}
+.nav-admin {
+    position: fixed;
+    top: 0;
+    right: 0;
 }
 
 /* /home */
