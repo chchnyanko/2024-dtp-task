@@ -38,12 +38,7 @@ a {
     gap: 10px;
 }
 .nav-navbar-box {
-    text-align: center;
-    width: 100px;
-    height: 100px;
-    padding-bottom: 80%;
-    background-color: #aaaaaa;
-    border-radius: 10px;
+    height: 200px;
 }
 .nav-admin {
     position: fixed;
