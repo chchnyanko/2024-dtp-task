@@ -11,10 +11,45 @@
         {% set hello_levi = 0 %}
         {% endif %}
         <img src="/static/{{title}}_weapon/{{selected_weapon[hello_levi]}}.png" alt="{{selected_weapon[1]}}" class="weapon-data-img">
+        
+        {% if title == "main" %}
         <div>
-            {% for i in range(selected_weapon | length - 2) %}
-            <p> {{columns[i + 2]}} {{selected_weapon[i + 2]}}</p>
-            {% endfor %}
+            <table>
+                <tr>
+                    <td><p>Weapon Type</p></td>
+                    <td><p>{{weapon_type[0][0]}}</p></td>
+                </tr>
+                <tr>
+                    <td><p>Damage</p></td>
+                    <td><p>{{selected_weapon[3]}}</p></td>
+                    <td><progress value="{{selected_weapon[3]}}" max="180"></progress></td>
+                </tr>
+                <tr>
+                    <td><p>Range</p></td>
+                    <td><p>{{selected_weapon[4]}}</p></td>
+                    <td><progress value="{{selected_weapon[4]}}" max="6.5"></progress></td>
+                </tr>
+                <tr>
+                    <td><p>Attack Rate</p></td>
+                    <td><p>{{selected_weapon[5]}}</p></td>
+                    <td><progress value="{{selected_weapon[5]}}" max="100"></progress></td>
+                </tr>
+                <tr>
+                    <td><p>Ink Consumption</p></td>
+                    <td><p>{{selected_weapon[6]}}</p></td>
+                    <td><progress value="{{selected_weapon[6]}}" max="2"></progress></td>
+                </tr>
+                <tr>
+                    <td><p>Speed While Shooting</p></td>
+                    <td><p>{{selected_weapon[7]}}</p></td>
+                    <td><progress value="{{selected_weapon[7]}}" max="330"></progress></td>
+                </tr>
+            </table>
         </div>
+        {% elif title == "sub" %}
+
+        {% elif title == "special" %}
+
+        {% endif %}
     </div>
 </div>

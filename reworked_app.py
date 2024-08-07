@@ -64,11 +64,10 @@ def main(page, weaponID):
     weapons = get_page("MainWeapon", offset)
     if weaponID != 0:
         selected_weapon = select_weapon("SELECT * FROM MainWeapon WHERE MainWeaponID = ?;", (weaponID, ))
-        columns = get_columns("SELECT * FROM MainWeapon")
+        weapon_type = connect_database("SELECT WeaponType FROM WeaponTypes WHERE WeaponTypeID = ?;", (selected_weapon[2],))
     else:
         selected_weapon = (0, 0)
-        columns = (0, 0)
-    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, columns = columns, title="main")
+    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, weapon_type=weapon_type, title="main")
 
 
 @app.route("/sub/<int:page>/<int:weaponID>")
@@ -81,11 +80,10 @@ def sub(page, weaponID):
     weapons = get_page("SubWeapon", offset)
     if weaponID != 0:
         selected_weapon = select_weapon("SELECT * FROM SubWeapon WHERE SubWeaponID = ?;", (weaponID, ))
-        columns = get_columns("SELECT * FROM SubWeapon")
+        
     else:
         selected_weapon = (0, 0)
-        columns = (0, 0)
-    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, columns=columns, title="sub")
+    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, title="sub")
 
 
 @app.route("/special/<int:page>/<int:weaponID>")
@@ -98,11 +96,10 @@ def special(page, weaponID):
     weapons = get_page("SpecialWeapon", offset)
     if weaponID != 0:
         selected_weapon = select_weapon("SELECT * FROM SpecialWeapon WHERE SpecialWeaponID = ?;", (weaponID, ))
-        columns = get_columns("SELECT * FROM SpecialWeapon")
+        
     else:
         selected_weapon = (0, 0)
-        columns = (0, 0)
-    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, columns=columns, title="special")
+    return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=weapons, selected_weapon=selected_weapon, title="special")
 
 
 @app.route("/all/<int:page>/<int:weaponID>")
