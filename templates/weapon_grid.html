@@ -13,14 +13,15 @@
         {% endif %}
     </div>
     {% endfor %}
+
+    {% if page == 1 %}
+    <div back class="weapon-back-button"><a href="/{{title}}/{{total_pages}}/{{selected_weapon[0]}}">back</a></div>
+    {% else %}
+    <div back class="weapon-back-button"><a href="/{{title}}/{{page-1}}/{{selected_weapon[0]}}">back</a></div>
+    {% endif %}
+    {% if page >= total_pages %}
+    <div next class="weapon-next-button"><a href="/{{title}}/{{1}}/{{selected_weapon[0]}}">next</a></div>
+    {% else %}
+    <div next class="weapon-next-button"><a href="/{{title}}/{{page+1}}/{{selected_weapon[0]}}">next</a></div>
+    {% endif %}
 </div>
-{% if page == 1 %}
-<div back><a href="/{{title}}/{{total_pages}}/{{selected_weapon[0]}}" class="weapon-back-button">back</a></div>
-{% else %}
-<div back><a href="/{{title}}/{{page-1}}/{{selected_weapon[0]}}" class="weapon-back-button">back</a></div>
-{% endif %}
-{% if page >= total_pages %}
-<div next><a href="/{{title}}/{{1}}/{{selected_weapon[0]}}" class="weapon-next-button">next</a></div>
-{% else %}
-<div next><a href="/{{title}}/{{page+1}}/{{selected_weapon[0]}}" class="weapon-next-button">next</a></div>
-{% endif %}
