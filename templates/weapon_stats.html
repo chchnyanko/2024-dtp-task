@@ -47,9 +47,50 @@
             </table>
         </div>
         {% elif title == "sub" %}
-
+        <div>
+            <table>
+                <tr>
+                    <td><p>Damage</p></td>
+                    <td><p>{{selected_weapon[2]}}</p></td>
+                    <td><progress value="{{selected_weapon[2]}}" max="180"></progress></td>
+                </tr>
+                <tr>
+                    <td><p>Ink Consumption</p></td>
+                    <td><p>{{selected_weapon[3]}}</p></td>
+                    <td><progress value="{{selected_weapon[3]}}" max="70"></progress></td>
+                </tr>
+                <tr>
+                    <td><p>Tracking Duration</p></td>
+                    <td><p>{{selected_weapon[4]}}</p></td>
+                    <td><progress value="{{selected_weapon[4]}}" max="10"></progress></td>
+                </tr>
+                <tr>
+                    <td><p>Damage Duration</p></td>
+                    <td><p>{{selected_weapon[5]}}</p></td>
+                    <td><progress value="{{selected_weapon[5]}}" max="10"></progress></td>
+                </tr>
+            </table>
+        </div>
         {% elif title == "special" %}
-
+        <div>
+            <table>
+                <tr>
+                    <td><p>Damage</p></td>
+                    <td><p>{{selected_weapon[2]}}</p></td>
+                    <td><progress value="{{selected_weapon[2]}}" max="220"></progress></td>
+                </tr>
+                <tr>
+                    <td><p>Number of Attacks</p></td>
+                    <td><p>{{selected_weapon[3]}}</p></td>
+                    <td><progress value="{{selected_weapon[3]}}" max="30"></progress></td>
+                </tr>
+                <tr>
+                    <td><p>Duration</p></td>
+                    <td><p>{{selected_weapon[4]}}</p></td>
+                    <td><progress value="{{selected_weapon[4]}}" max="17"></progress></td>
+                </tr>
+            </table>
+        </div>
         {% endif %}
     </div>
 </div>
