@@ -12,7 +12,8 @@ DB = "splatoon3.db"
 
 app.config['SECRET_KEY'] = "MyReallySecretKey"
 
-PAGESIZE = 12
+#the number of weapons shown in 1 page
+PAGESIZE = 12 
 
 
 def connect_database(query, id=None):
@@ -30,7 +31,7 @@ def connect_database(query, id=None):
 
 
 def get_page(table, offset):
-    '''Get the max number of pages'''
+    '''Get the weapons for the page selected'''
     query = f"SELECT * FROM {table} LIMIT ? OFFSET ?;"
     weapon = connect_database(query, (PAGESIZE, offset))
     return weapon
@@ -54,14 +55,18 @@ def home():
 @app.route("/main/<int:page>/<int:weapon_id>")
 def main(page, weapon_id):
     '''The page for main weapons'''
+    #get the total number of pages there are for main weapons
     total_pages = ceil(connect_database("SELECT COUNT (*) FROM MainWeapon")[0][0] / 12)
     if page <= total_pages:
         offset = (page - 1) * PAGESIZE
     else:
+        #if the page number is greater than the total number of pages, send the user to the last page
         offset = (total_pages - 1) * PAGESIZE
+    #get the main weapons that are going to be shown in the current page
     main_weapons = get_page("MainWeapon", offset)
+    #if there is a selected weapon, get the data for that weapon
     if weapon_id != 0:
-        selected_weapon = select_weapon("SELECT * FROM MainWeapon WHERE Mainweapon_id = ?;", (weapon_id, ))
+        selected_weapon = select_weapon("SELECT * FROM MainWeapon WHERE MainWeaponID = ?;", (weapon_id, ))
         weapon_type = connect_database("SELECT WeaponType FROM WeaponTypes WHERE WeaponTypeID = ?;", (selected_weapon[2],))
     else:
         selected_weapon = (0, 0)
@@ -72,14 +77,18 @@ def main(page, weapon_id):
 @app.route("/sub/<int:page>/<int:weapon_id>")
 def sub(page, weapon_id):
     '''The page for sub weapons'''
+    #get the total number of pages there are for sub weapons
     total_pages = ceil(connect_database("SELECT COUNT (*) FROM SubWeapon")[0][0] / 12)
     if page <= total_pages:
         offset = (page - 1) * PAGESIZE
     else:
+        #if the page number is greater than the total number of pages, send the user to the last page
         offset = (total_pages - 1) * PAGESIZE
+    #get the sub weapons that are going to be shown in the current page
     sub_weapons = get_page("SubWeapon", offset)
+    #if there is a selected weapon, get the data for that weapon
     if weapon_id != 0:
-        selected_weapon = select_weapon("SELECT * FROM SubWeapon WHERE Subweapon_id = ?;", (weapon_id, ))
+        selected_weapon = select_weapon("SELECT * FROM SubWeapon WHERE SubWeaponID = ?;", (weapon_id, ))
     else:
         selected_weapon = (0, 0)
     return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=sub_weapons, selected_weapon=selected_weapon, title="sub")
@@ -88,14 +97,18 @@ def sub(page, weapon_id):
 @app.route("/special/<int:page>/<int:weapon_id>")
 def special(page, weapon_id):
     '''The page for special weapons'''
+    #get the total number of pages there are for special weapons
     total_pages = ceil(connect_database("SELECT COUNT (*) FROM SpecialWeapon")[0][0] / 12)
     if page <= total_pages:
         offset = (page - 1) * PAGESIZE
     else:
+        #if the page number is greater than the total number of pages, send the user to the last page
         offset = (total_pages - 1) * PAGESIZE
+    #get the special weapons that are going to be shown in the current page
     special_weapons = get_page("SpecialWeapon", offset)
+    #if there is a selected weapon, get the data for that weapon
     if weapon_id != 0:
-        selected_weapon = select_weapon("SELECT * FROM SpecialWeapon WHERE Specialweapon_id = ?;", (weapon_id, ))
+        selected_weapon = select_weapon("SELECT * FROM SpecialWeapon WHERE SpecialWeaponID = ?;", (weapon_id, ))
     else:
         selected_weapon = (0, 0)
     return render_template("reworked_main.html", page=page, total_pages=total_pages, weapons=special_weapons, selected_weapon=selected_weapon, title="special")
@@ -104,19 +117,23 @@ def special(page, weapon_id):
 @app.route("/all/<int:page>/<int:weapon_id>")
 def weapons(page, weapon_id):
     '''The page for all the weapons and their kits'''
+    #get the total number of pages there are for all weapons
     total_pages = ceil(connect_database("SELECT COUNT (*) FROM Weapons")[0][0] / 12)
     if page <= total_pages:
         offset = (page - 1) * PAGESIZE
     else:
+        #if the page number is greater than the total number of pages, send the user to the last page
         offset = (total_pages - 1) * PAGESIZE
+    #get the weapons that are going to be shown in the current page
     all_weapons = get_page("Weapons", offset)
+    #if there is a selected weapon, get the data for that weapon
     if weapon_id != 0:
-        selected_weapon = select_weapon("SELECT * FROM Weapons WHERE weapon_id = ?", (weapon_id, ))
-        print("hello", selected_weapon)
+        selected_weapon = select_weapon("SELECT * FROM Weapons WHERE WeaponID = ?", (weapon_id, ))
+        #if the selected weapon exists, add data for the weapon ID's for the main, sub and special weapons to use for links
         if len(selected_weapon) > 2:
             selected_weapon += (int(ceil(int(selected_weapon[2])/12)),)
-            selected_weapon += (connect_database("SELECT SubWeaponName FROM SubWeapon WHERE Subweapon_id = ?", (selected_weapon[3], ))[0][0],)
-            selected_weapon += (connect_database("SELECT SpecialWeaponName FROM SpecialWeapon WHERE Specialweapon_id = ?", (selected_weapon[4], ))[0][0],)
+            selected_weapon += (connect_database("SELECT SubWeaponName FROM SubWeapon WHERE SubweaponID = ?", (selected_weapon[3], ))[0][0],)
+            selected_weapon += (connect_database("SELECT SpecialWeaponName FROM SpecialWeapon WHERE SpecialweaponID = ?", (selected_weapon[4], ))[0][0],)
     else:
         selected_weapon = (0, 0)
     return render_template("all.html", page=page, total_pages=total_pages, weapons=all_weapons, selected_weapon=selected_weapon, title="all")
@@ -127,13 +144,14 @@ def admin_login():
     '''The admin page for the admin login'''
     try:
         if request.method == "POST":
+            #get the inputted username and password
             username = request.form["username"]
             password = request.form["password"]
             query = "SELECT password FROM Users WHERE username = ?"
-            print(connect_database(query, (username,)))
             correct_password = connect_database(query, (username,))[0][0]
+            #check is the inputted password is the same as the correct password
             if check_password_hash(correct_password, password):
-                print("password correct")
+                #get the names of all of the weapons
                 main_query = "SELECT MainWeaponName FROM MainWeapon"
                 mains = connect_database(main_query)
                 sub_query = "SELECT SubWeaponName FROM SubWeapon"
@@ -142,6 +160,7 @@ def admin_login():
                 specials = connect_database(speical_query)
                 return render_template("admin.html", main_weapons=mains, sub_weapons=subs, special_weapons=specials)
     except:
+        #if the inputted username or password doesn't match or exist, flash the message
         flash("Username or Password is Incorrect")
     return render_template("admin_login.html")
 
@@ -149,7 +168,7 @@ def admin_login():
 @app.post("/add_weapon")
 def add_weapon():
     '''The admin page for adding and editing data from the database'''
-    print(request.form)
+    
     update = request.form["update"]
     table = request.form["table"]
     id = request.form["id"]
