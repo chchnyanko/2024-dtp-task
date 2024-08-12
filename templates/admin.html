@@ -5,26 +5,26 @@
 {% else %}
 <div>
     <form action="/add_weapon" method="post">
-        <select name="update" id="update">
+        <select name="update" id="update" class="font2 black">
             <option value="add">Add to existing table</option>
             <option value="update">Update existing data</option>
             <option value="delete">Delete an existing weapon from the database</option>
             <!-- TODO make delete function -->
         </select>
-        <select name="table" id="table">
+        <select name="table" id="table" class="font2 black">
             <option value="weapon">Weapon</option>
             <option value="main">Main Weapon</option>
             <option value="sub">Sub Weapon</option>
             <option value="special">Special Weapon</option>
         </select><br>
-        <label for="id">ID</label>
-        <input type="number" name="id">
+        <label for="id" class="font2 black">ID</label>
+        <input type="number" name="id" class="font2 black">
         <br>
-        <label for="weapon_name">Weapon Name</label>
-        <input type="text" name="weapon_name">
+        <label for="weapon_name" class="font2 black">Weapon Name</label>
+        <input type="text" name="weapon_name" class="font2 black">
         <br>
-        <label for="main_weapon">Main Weapon</label>
-        <select name="main_weapon" id="post">
+        <label for="main_weapon" class="font2 black">Main Weapon</label>
+        <select name="main_weapon" id="post" class="font2 black">
             <option value="">select main weapon</option>
             {% for weapon in main_weapons %}
             <option value="{{weapon[0]}}">{{weapon[0]}}</option>
@@ -32,8 +32,8 @@
             {% endfor %}
         </select>
         <br>
-        <label for="sub_weapon">Sub Weapon</label>
-        <select name="sub_weapon" id="post">
+        <label for="sub_weapon" class="font2 black">Sub Weapon</label>
+        <select name="sub_weapon" id="post" class="font2 black">
             <option value="">select sub weapon</option>
             {% for weapon in sub_weapons %}
             <option value="{{weapon[0]}}">{{weapon[0]}}</option>
@@ -41,8 +41,8 @@
             {% endfor %}
         </select>
         <br>
-        <label for="speical_weapon">Special Weapon</label>
-        <select name="special_weapon" id="post">
+        <label for="speical_weapon" class="font2 black">Special Weapon</label>
+        <select name="special_weapon" id="post" class="font2 black">
             <option value="">select special weapon</option>
             {% for weapon in special_weapons %}
             <option value="{{weapon[0]}}">{{weapon[0]}}</option>
@@ -50,13 +50,13 @@
             {% endfor %}
         </select>
         <br>
-        <label for="points">Required Spcieal Points</label>
-        <input type="number" name="points">
+        <label for="points" class="font2 black">Required Spcieal Points</label>
+        <input type="number" name="points" class="font2 black">
         <br>
-        <label for="version">Introduced Version</label>
-        <input type="number" name="version">
+        <label for="version" class="font2 black">Introduced Version</label>
+        <input type="number" name="version" class="font2 black">
         <br>   
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="font2 black">
     </form>
 </div>
 {% endif %}
