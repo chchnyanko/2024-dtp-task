@@ -1,7 +1,7 @@
 <div class="weapon-data-background">
     <div class="weapon-data-yellow-background">
         <div class="weapon-data-name">
-            <h1>{{selected_weapon[1]}}</h1>
+            <h1 class="font1">{{selected_weapon[1]}}</h1>
         </div>
     </div>
     <div class="weapon-data-grid">
@@ -14,79 +14,79 @@
         
         {% if title == "main" %}
         <div>
-            <table>
+            <table class="weapon-data-table">
                 <tr>
-                    <td><p>Weapon Type</p></td>
-                    <td><p>{{weapon_type[0][0]}}</p></td>
+                    <td><p class="font2">Weapon Type:</p></td>
+                    <td><p class="font2">{{weapon_type[0][0]}}</p></td>
                 </tr>
                 <tr>
-                    <td><p>Damage</p></td>
-                    <td><p>{{selected_weapon[3]}}</p></td>
+                    <td><p class="font2">Damage</p></td>
+                    <td><p class="font2">{{selected_weapon[3]}}</p></td>
                     <td><progress value="{{selected_weapon[3]}}" max="180"></progress></td>
                 </tr>
                 <tr>
-                    <td><p>Range</p></td>
-                    <td><p>{{selected_weapon[4]}}</p></td>
+                    <td><p class="font2">Range</p></td>
+                    <td><p class="font2">{{selected_weapon[4]}}</p></td>
                     <td><progress value="{{selected_weapon[4]}}" max="6.5"></progress></td>
                 </tr>
                 <tr>
-                    <td><p>Attack Rate</p></td>
-                    <td><p>{{selected_weapon[5]}}</p></td>
+                    <td><p class="font2">Attack Rate</p></td>
+                    <td><p class="font2">{{selected_weapon[5]}}</p></td>
                     <td><progress value="{{selected_weapon[5]}}" max="100"></progress></td>
                 </tr>
                 <tr>
-                    <td><p>Ink Consumption</p></td>
-                    <td><p>{{selected_weapon[6]}}</p></td>
+                    <td><p class="font2">Ink Consumption</p></td>
+                    <td><p class="font2">{{selected_weapon[6]}}</p></td>
                     <td><progress value="{{selected_weapon[6]}}" max="2"></progress></td>
                 </tr>
                 <tr>
-                    <td><p>Speed While Shooting</p></td>
-                    <td><p>{{selected_weapon[7]}}</p></td>
+                    <td><p class="font2">Speed While Shooting</p></td>
+                    <td><p class="font2">{{selected_weapon[7]}}</p></td>
                     <td><progress value="{{selected_weapon[7]}}" max="330"></progress></td>
                 </tr>
             </table>
         </div>
         {% elif title == "sub" %}
         <div>
-            <table>
+            <table class="weapon-data-table">
                 <tr>
-                    <td><p>Damage</p></td>
-                    <td><p>{{selected_weapon[2]}}</p></td>
+                    <td><p class="font2">Damage</p></td>
+                    <td><p class="font2">{{selected_weapon[2]}}</p></td>
                     <td><progress value="{{selected_weapon[2]}}" max="180"></progress></td>
                 </tr>
                 <tr>
-                    <td><p>Ink Consumption</p></td>
-                    <td><p>{{selected_weapon[3]}}</p></td>
+                    <td><p class="font2">Ink Consumption</p></td>
+                    <td><p class="font2">{{selected_weapon[3]}}</p></td>
                     <td><progress value="{{selected_weapon[3]}}" max="70"></progress></td>
                 </tr>
                 <tr>
-                    <td><p>Tracking Duration</p></td>
-                    <td><p>{{selected_weapon[4]}}</p></td>
+                    <td><p class="font2">Tracking Duration</p></td>
+                    <td><p class="font2">{{selected_weapon[4]}}</p></td>
                     <td><progress value="{{selected_weapon[4]}}" max="10"></progress></td>
                 </tr>
                 <tr>
-                    <td><p>Damage Duration</p></td>
-                    <td><p>{{selected_weapon[5]}}</p></td>
+                    <td><p class="font2">Damage Duration</p></td>
+                    <td><p class="font2">{{selected_weapon[5]}}</p></td>
                     <td><progress value="{{selected_weapon[5]}}" max="10"></progress></td>
                 </tr>
             </table>
         </div>
         {% elif title == "special" %}
         <div>
-            <table>
+            <table class="weapon-data-table">
                 <tr>
-                    <td><p>Damage</p></td>
-                    <td><p>{{selected_weapon[2]}}</p></td>
+                    <td><p class="font2">Damage</p></td>
+                    <td><p class="font2">{{selected_weapon[2]}}</p></td>
                     <td><progress value="{{selected_weapon[2]}}" max="220"></progress></td>
                 </tr>
                 <tr>
-                    <td><p>Number of Attacks</p></td>
-                    <td><p>{{selected_weapon[3]}}</p></td>
+                    <td><p class="font2">Number of Attacks</p></td>
+                    <td><p class="font2">{{selected_weapon[3]}}</p></td>
                     <td><progress value="{{selected_weapon[3]}}" max="30"></progress></td>
                 </tr>
                 <tr>
-                    <td><p>Duration</p></td>
-                    <td><p>{{selected_weapon[4]}}</p></td>
+                    <td><p class="font2">Duration</p></td>
+                    <td><p class="font2">{{selected_weapon[4]}}</p></td>
                     <td><progress value="{{selected_weapon[4]}}" max="17"></progress></td>
                 </tr>
             </table>

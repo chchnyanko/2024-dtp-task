@@ -16,21 +16,21 @@
     </div>
     {% endfor %}
     {% if page == 1 %}
-    <div class="weapon-back-button"><a href="/all/{{total_pages}}/{{selected_weapon[0]}}">back</a></div>
+    <a href="/all/{{total_pages}}/{{selected_weapon[0]}}"><div class="weapon-back-button font2">back</div></a>
     {% else %}
-    <div class="weapon-back-button"><a href="/all/{{page-1}}/{{selected_weapon[0]}}">back</a></div>
+    <a href="/all/{{page-1}}/{{selected_weapon[0]}}"><div class="weapon-back-button font2">back</div></a>
     {% endif %}
     {% if page >= total_pages %}
-    <div class="weapon-next-button"><a href="/all/{{1}}/{{selected_weapon[0]}}">next</a></div>
+    <a href="/all/{{1}}/{{selected_weapon[0]}}"><div class="weapon-next-button font2">next</div></a>
     {% else %}
-    <div class="weapon-next-button"><a href="/all/{{page+1}}/{{selected_weapon[0]}}">next</a></div>
+    <a href="/all/{{page+1}}/{{selected_weapon[0]}}"><div class="weapon-next-button font2">next</div></a>
     {% endif %}
 </div>
 
 {% if selected_weapon[0] != 0 %}
 <div class="weapon-data-background">
     <div class="weapon-data-yellow-background">
-        <div class="weapon-data-name">
+        <div class="weapon-data-name font1">
             <h1>{{selected_weapon[1]}}</h1>
         </div>
     </div>
@@ -39,16 +39,16 @@
         <div>
             <a href="/sub/1/{{selected_weapon[3]}}"><div class="all-data-black-box">
                 <img src="/static/sub_weapon/{{selected_weapon[3]}}.png" alt="{{selected_weapon[3]}}" class="all-data-sub-img">
-                <span class="all-data-text">{{selected_weapon[8]}}</span>
+                <span class="all-data-text font2">{{selected_weapon[8]}}</span>
             </div></a>
             <a href="/special/1/{{selected_weapon[4]}}"><div class="all-data-black-box">
                 <img src="/static/special_weapon/{{selected_weapon[4]}}.png" alt="{{selected_weapon[4]}}" class="all-data-special-img">
-                <span class="all-data-text">{{selected_weapon[9]}}</span>
+                <span class="all-data-text font2">{{selected_weapon[9]}}</span>
             </div></a>
-            <p>Introduced Version: {{selected_weapon[6]}}</p>
+            <p class="all-data-version font2">Introduced Version: {{selected_weapon[6]}}</p>
         </div>
     </div>
-    <p class="all-data-special-points">Points for Special: {{selected_weapon[5]}}p</p>
+    <p class="all-data-special-points font2">Points for Special: {{selected_weapon[5]}}p</p>
 </div>
 {% endif %}
 {% endblock %}

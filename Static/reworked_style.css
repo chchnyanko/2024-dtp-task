@@ -6,7 +6,7 @@
 @font-face {
     font-family: font2;
     src: url(/static/Splatoon2.otf);
-    font-size: large;
+    font-weight: bold;
 }
 html {
     color: white;
@@ -18,6 +18,10 @@ body {
 
 a {
     text-decoration: none;
+    color: white;
+}
+a :hover {
+    color: #bbbbbb;
 }
 
 /* general */
@@ -27,6 +31,7 @@ a {
 }
 .font2 {
     font-family: font2;
+    font-size: 30px;
 }
 .black {
     color: black;
@@ -52,6 +57,7 @@ a {
 }
 .nav-navbar-box {
     height: 150px;
+    width: 150px;
 }
 .nav-admin {
     position: fixed;
@@ -61,20 +67,21 @@ a {
 
 /* /home */
 .home-title {
-    position: absolute;
+    position: fixed;
     top: 0;
+    left: 10px;
 }
 .home-grid {
     position: relative;
-    top: 20%;
-    height: 50%;
+    top: 100px;
+    height: 100%;
     display: grid;
     grid-template-columns: 2fr 3fr;
     gap: 30px;
 }
 .home-contents {
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color: #b1b1b1;
     border-radius: 30px;
 }
 .home-link {
@@ -123,7 +130,7 @@ a {
     top: 35%;
     background-color: black;
     text-align: right;
-    width: 60px;
+    width: 80px;
     clip-path: polygon(10px 100%,0 0,100% 0,100% 100%);
 }
 .weapon-next-button {
@@ -132,8 +139,8 @@ a {
     top: 35%;
     background-color: black;
     text-align: left;
-    width: 60px;
-    clip-path: polygon(0 0, 100% 0, 50px 100%, 0 100%);
+    width: 80px;
+    clip-path: polygon(0 0, 100% 0, 70px 100%, 0 100%);
 }
 
 /* weapon data (used for the stats of the selected weapon) */
@@ -161,6 +168,7 @@ a {
 }
 .weapon-data-grid {
     position: relative;
+    height: 100%;
     top: -30px;
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -169,6 +177,15 @@ a {
 }
 .weapon-data-img {
     width: 200px;
+}
+.weapon-data-table p {
+    margin: 0;
+    font-size: 20px;
+}
+.wepaon-data-table tr,td {
+    text-align: left;
+    padding-left: 10px;
+    border-color: black;
 }
 
 /* all (used by the all page) */
@@ -215,4 +232,8 @@ a {
     bottom: -30px;
     height: 50px;
     width: calc(100% - 20px);
+}
+.all-data-version {
+    position: relative;
+    top: -20px;
 }

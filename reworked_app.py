@@ -176,19 +176,19 @@ def add_weapon():
     weapon_name = request.form["weapon_name"]
     main_weapon = request.form["main_weapon"]
 
-    main_weapon_id = connect_database("SELECT Mainweapon_id FROM MainWeapon WHERE MainWeaponName = ?", (main_weapon,))[0][0]
+    main_weapon_id = connect_database("SELECT MainWeaponID FROM MainWeapon WHERE MainWeaponName = ?", (main_weapon,))[0][0]
     sub_weapon = request.form["sub_weapon"]
-    sub_weapon_id = connect_database("SELECT Subweapon_id FROM SubWeapon WHERE SubWeaponName = ?", (sub_weapon,))[0][0]
+    sub_weapon_id = connect_database("SELECT SubWeaponID FROM SubWeapon WHERE SubWeaponName = ?", (sub_weapon,))[0][0]
     special_weapon = request.form["special_weapon"]
-    special_weapon_id = connect_database("SELECT Specialweapon_id FROM SpecialWeapon WHERE SpecialWeaponName = ?", (special_weapon, ))[0][0]
+    special_weapon_id = connect_database("SELECT SpecialWeaponID FROM SpecialWeapon WHERE SpecialWeaponName = ?", (special_weapon, ))[0][0]
     
     points = request.form["points"]
     version = request.form["version"]
     if update == "update":
-        query = "UPDATE Weapons SET WeaponName = ?, Mainweapon_id = ?, Subweapon_id = ?, Specialweapon_id = ?, SpecialPoint = ?, VersionID = ? WHERE weapon_id = ?"
+        query = "UPDATE Weapons SET WeaponName = ?, MainWeaponID = ?, SubWeaponID = ?, SpecialWeaponID = ?, SpecialPoint = ?, VersionID = ? WHERE weapon_id = ?"
         connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version, id))
     elif update == "add":
-        query = "INSERT INTO Weapons (WeaponName, Mainweapon_id, Subweapon_id, Specialweapon_id, SpecialPoint, VersionID) VALUES (?,?,?,?,?,?)"
+        query = "INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID, SpecialPoint, VersionID) VALUES (?,?,?,?,?,?)"
         connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version))
     elif update == "delete":
         query = "DELETE FROM Weapons WHERE weapon_id = ?"
@@ -206,6 +206,12 @@ def signup():
         query = "INSERT INTO Users (Username, Password) VALUES (?,?)"
         connect_database(query, (username, hashed_password))
     return render_template("signup.html")
+
+
+@app.route("/games")
+def games():
+    '''This is an easteregg with all of the games that I have made in the past'''
+    return render_template("games.html")
 
 
 @app.errorhandler(404)

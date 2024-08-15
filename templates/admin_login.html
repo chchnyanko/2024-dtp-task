@@ -2,7 +2,7 @@
 {% block content %}
 <h1 class="font1 black">Login to access the admin page</h1>
 {% with error = get_flashed_messages() %}
-{{error[0]}}
+<p class="font1 black">{{error[0]}}</p>
 {% endwith %}
 <form action="/admin_login" method="post">
     <label for="username" class="font2 black">Username</label>

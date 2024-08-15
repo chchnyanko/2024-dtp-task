@@ -1,13 +1,13 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1>Signup</h1>
+<h1 class="font1 black">Signup</h1>
 <!-- A form to login with -->
 <!-- the ACTION is the route we try to post to! -->
 <form action="/signup" method="post">
-    <label for="username">Username</label>
-    <input type="text" name="username">
-    <label for="password">Password</label>
-    <input type="password" name="password">
-    <button type="submit">Signup</button>
+    <label for="username" class="font2 black">Username</label>
+    <input type="text" name="username" class="font2 black">
+    <label for="password" class="font2 black">Password</label>
+    <input type="password" name="password" class="font2 black">
+    <button type="submit" class="font2 black">Signup</button>
 </form>
 {% endblock %}

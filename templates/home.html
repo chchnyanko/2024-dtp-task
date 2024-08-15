@@ -1,28 +1,53 @@
-<img src="/static/other_images/22_HBD_Splatoon_1920_1080.jpg" class="home-background-img">
 {% extends "layout.html" %}
 {% block content %}
 <div class="home-title">
-    <h1>Splatoon 3</h1>
+    <h1 class="font1 black">Splatoon 3</h1>
 </div>
-<div class="home-grid">
-    <div class="home-contents">
-        <p>This web app is developed for a school class and therefore is for educational purposes only. </p>
-    </div>
-    <div class="home-contents">
-        <a href="/all/1/0"><div>
-            <p class="home-link">View all weapons</p>
-        </div></a>
-        <div class="home-links-grid">
-            <a href="/main/1/0" class="home-link"><div>
-                <p>Main weapons</p>
-            </div></a>
-            <a href="/sub/1/0" class="home-link"><div>
-                <p>Sub weapons</p>
-            </div></a>
-            <a href="/special/1/0" class="home-link"><div>
-                <p>Special weapons</p>
+
+<div class="weapon-grid">
+    <p class="font2">This web app is developed for a school class and therefore is for educational purposes only. </p>
+</div>
+<div class="weapon-data-background">
+    <div class="weapon-data-yellow-background">
+        <div class="weapon-data-name font1">
+            <a href="/all/1/0"><div>
+                <p class="font2">View all weapons</p>
             </div></a>
         </div>
     </div>
+    <div class="home-links-grid">
+        <a href="/main/1/0" class="home-link"><div>
+            <p class="font2">Main weapons</p>
+        </div></a>
+        <a href="/sub/1/0" class="home-link"><div>
+            <p class="font2">Sub weapons</p>
+        </div></a>
+        <a href="/special/1/0" class="home-link"><div>
+            <p class="font2">Special weapons</p>
+        </div></a>
+    </div>
 </div>
+</div>
+
+<!-- <div class="home-grid">
+    <div class="home-contents weapon-grid">
+        <p class="font2 black">This web app is developed for a school class and therefore is for educational purposes only. </p>
+    </div>
+    <div class="home-contents weapon-data-background">
+        <a href="/all/1/0"><div>
+            <p class="home-link font2">View all weapons</p>
+        </div></a>
+        <div class="home-links-grid">
+            <a href="/main/1/0" class="home-link"><div>
+                <p class="font2">Main weapons</p>
+            </div></a>
+            <a href="/sub/1/0" class="home-link"><div>
+                <p class="font2">Sub weapons</p>
+            </div></a>
+            <a href="/special/1/0" class="home-link"><div>
+                <p class="font2">Special weapons</p>
+            </div></a>
+        </div>
+    </div>
+</div> -->
 {% endblock %}
