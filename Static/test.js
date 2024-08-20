@@ -22,12 +22,14 @@ const label_names = {
     sub:["Weapon ID", "Weapon Name", "Damage", "Ink Consumption", "Tracking Duration", "Damage Duration"],
     special:["Weapon ID", "Weapon Name", "Damage", "Number of Attacks", "Duration"]
 }
+
 function update_labels() {
     let hi = document.getElementsByClassName("admin-label");
     for(let i = 0; i < hi.length; i++){
-        console.log(i);
-        console.log(hi[i])
-        console.log(table.value)
-        hi[i].innerHTML = label_names[table.value][i]
+        if(label_names[table.value][i] == undefined){
+            hi[i].innerHTML = ""
+        }else{
+            hi[i].innerHTML = label_names[table.value][i]
+        }
     }
 }

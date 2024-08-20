@@ -5,7 +5,7 @@
 {% else %}
 <div>
     <form action="/add_weapon" method="post">
-        <table>
+        <table id="table-base">
             <tr>
                 <td>
                     <select name="update" id="update" class="font2 black">
@@ -98,12 +98,8 @@
                     <input type="number" name="version" class="font2 black" min="0" max="10">
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Submit" class="font2 black">
-                </td>
-            </tr>
         </table>
+        <input type="submit" value="Submit" class="font2 black">
     </form>
 </div>
 {% endif %}

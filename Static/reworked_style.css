@@ -177,6 +177,7 @@ a :hover {
 }
 .weapon-data-img {
     width: 200px;
+    height: 200px;
 }
 .weapon-data-table p {
     margin: 0;
