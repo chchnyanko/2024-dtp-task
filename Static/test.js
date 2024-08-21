@@ -24,12 +24,12 @@ const label_names = {
 }
 
 function update_labels() {
-    let hi = document.getElementsByClassName("admin-label");
-    for(let i = 0; i < hi.length; i++){
-        if(label_names[table.value][i] == undefined){
-            hi[i].innerHTML = ""
-        }else{
-            hi[i].innerHTML = label_names[table.value][i]
-        }
+    let hi = document.getElementsByClassName(String(table.value + "-table"));
+    let bye = document.getElementsByTagName("tr")
+    for(let i = 1; i < bye.length; i ++){
+        bye[i].style.display = "none"
+    }
+    for(let i = 0; i < hi.length; i ++){
+        hi[i].style.display = "block"
     }
 }

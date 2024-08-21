@@ -238,3 +238,17 @@ a :hover {
     position: relative;
     top: -20px;
 }
+
+/* admin */
+.weapon-table {
+    display: block;
+}
+.main-table {
+    display: none;
+}
+.sub-table {
+    display: none;
+}
+.special-table {
+    display: none;
+}

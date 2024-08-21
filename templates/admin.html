@@ -6,7 +6,7 @@
 <!-- make separate pages for each of them :) -->
 <div>
     <form action="/add_weapon" method="post">
-        <table id="table-base">
+        <table>
             <tr>
                 <td>
                     <select name="update" id="update" class="font2 black">
@@ -25,25 +25,27 @@
                     </select>
                 </td>
             </tr>
-            <tr>
+
+            <!-- weapons -->
+            <tr class="weapon-table">
                 <td>
-                    <label for="id" class="font2 black admin-label">ID</label>
+                    <label for="id" class="font2 black">ID</label>
                 </td>
                 <td>
                     <input type="number" name="id" class="font2 black">
                 </td>
             </tr>
-            <tr>
+            <tr class="weapon-table">
                 <td>
-                    <label for="weapon_name" class="font2 black admin-label">Weapon Name</label>
+                    <label for="weapon_name" class="font2 black">Weapon Name</label>
                 </td>
                 <td>
                     <input type="text" name="weapon_name" class="font2 black">
                 </td>
             </tr>
-            <tr>
+            <tr class="weapon-table">
                 <td>
-                    <label for="main_weapon" class="font2 black admin-label">Main Weapon</label>
+                    <label for="main_weapon" class="font2 black">Main Weapon</label>
                 </td>
                 <td>
                     <select name="main_weapon" id="post" class="font2 black">
@@ -55,9 +57,9 @@
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr class="weapon-table">
                 <td>
-                    <label for="sub_weapon" class="font2 black admin-label">Sub Weapon</label>
+                    <label for="sub_weapon" class="font2 black">Sub Weapon</label>
                 </td>
                 <td>
                     <select name="sub_weapon" id="post" class="font2 black">
@@ -69,9 +71,9 @@
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr class="weapon-table">
                 <td>
-                    <label for="speical_weapon" class="font2 black admin-label">Special Weapon</label>   
+                    <label for="speical_weapon" class="font2 black">Special Weapon</label>   
                 </td>
                 <td>
                     <select name="special_weapon" id="post" class="font2 black">
@@ -83,22 +85,103 @@
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr class="weapon-table">
                 <td>
-                    <label for="points" class="font2 black admin-label">Required Spcieal Points</label>
+                    <label for="points" class="font2 black">Required Spcieal Points</label>
                 </td>
                 <td>
                     <input type="number" name="points" class="font2 black">
                 </td>
             </tr>
-            <tr>
+            <tr class="weapon-table">
                 <td>
-                    <label for="version" class="font2 black admin-label">Introduced Version</label>
+                    <label for="version" class="font2 black">Introduced Version</label>
                 </td>
                 <td>
                     <input type="number" name="version" class="font2 black" min="0" max="10">
                 </td>
             </tr>
+            <!-- /weapons -->
+
+            <!-- main -->
+            <tr class="main-table">
+                <td>
+                    <label for="id" class="font2 black">ID</label>
+                </td>
+                <td>
+                    <input type="number" name="id" class="font2 black">
+                </td>
+            </tr>
+            <tr class="main-table">
+                <td>
+                    <label for="weapon_name" class="font2 black">Weapon Name</label>
+                </td>
+                <td>
+                    <input type="text" name="weapon_name" class="font2 black">
+                </td>
+            </tr>
+            <tr class="main-table">
+                <td>
+                    <label for="weapon_type" class="font2 black">Weapon Type</label>
+                </td>
+                <td>
+                    <select name="weapon_type" id="post" class="font2 black">
+                        <option value="">Select Weapon Type</option>
+                        {% for types in main_types %}
+                        <option value="{{types[0]}}">{{types[0]}}</option>
+                        <hr>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr class="main-table">
+                <td>
+                    <label for="damage" class="font2 black">Weapon Name</label>
+                </td>
+                <td>
+                    <input type="number" name="damage" class="font2 black" min="0">
+                </td>
+            </tr>
+            <!-- /main -->
+
+            <!-- sub -->
+            <tr class="sub-table">
+                <td>
+                    <label for="id" class="font2 black">ID</label>
+                </td>
+                <td>
+                    <input type="number" name="id" class="font2 black">
+                </td>
+            </tr>
+            <tr class="sub-table">
+                <td>
+                    <label for="weapon_name" class="font2 black">Weapon Name</label>
+                </td>
+                <td>
+                    <input type="text" name="weapon_name" class="font2 black">
+                </td>
+            </tr>
+            <!-- /sub -->
+
+            <!-- special -->
+            <tr class="special-table">
+                <td>
+                    <label for="id" class="font2 black">ID</label>
+                </td>
+                <td>
+                    <input type="number" name="id" class="font2 black">
+                </td>
+            </tr>
+            <tr class="special-table">
+                <td>
+                    <label for="weapon_name" class="font2 black">Weapon Name</label>
+                </td>
+                <td>
+                    <input type="text" name="weapon_name" class="font2 black">
+                </td>
+            </tr>
+            <!-- /special -->
+
         </table>
         <input type="submit" value="Submit" class="font2 black">
     </form>

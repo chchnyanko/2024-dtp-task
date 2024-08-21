@@ -12,6 +12,13 @@ DB = "splatoon3.db"
 
 app.config['SECRET_KEY'] = "MyReallySecretKey"
 
+LABEL_NAMES: dict = {
+    "weapon": ["Weapon ID", "Weapon Name", "Main Weapon", "Sub Weapon", "Special Weapon", "Points for Special", "Introduced Version"],
+    "main": ["Weapon ID", "Weapon Name", "Weapon Type", "Damage", "Range", "Attack Rate", "Ink Usage", "Speed While Shooting"],
+    "sub": ["Weapon ID", "Weapon Name", "Damage", "Ink Consumption", "Tracking Duration", "Damage Duration"],
+    "special": ["Weapon ID", "Weapon Name", "Damage", "Number of Attacks", "Duration"]
+}
+
 #the number of weapons shown in 1 page
 PAGESIZE = 12 
 
@@ -158,7 +165,9 @@ def admin_login():
                 subs = connect_database(sub_query)
                 speical_query = "SELECT SpecialWeaponName FROM SpecialWeapon"
                 specials = connect_database(speical_query)
-                return render_template("admin.html", main_weapons=mains, sub_weapons=subs, special_weapons=specials)
+                type_query = "SELECT WeaponType FROM WeaponTypes"
+                main_types = connect_database(type_query)
+                return render_template("admin.html", main_weapons=mains, sub_weapons=subs, special_weapons=specials, main_types=main_types)
     except:
         #if the inputted username or password doesn't match or exist, flash the message
         flash("Username or Password is Incorrect")
