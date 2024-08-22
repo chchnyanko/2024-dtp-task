@@ -26,7 +26,7 @@
                 </td>
             </tr>
 
-            <!-- weapons -->
+
             <tr class="weapon-table">
                 <td>
                     <label for="id" class="font2 black">ID</label>
@@ -101,9 +101,8 @@
                     <input type="number" name="version" class="font2 black" min="0" max="10">
                 </td>
             </tr>
-            <!-- /weapons -->
 
-            <!-- main -->
+
             <tr class="main-table">
                 <td>
                     <label for="id" class="font2 black">ID</label>
@@ -136,15 +135,46 @@
             </tr>
             <tr class="main-table">
                 <td>
-                    <label for="damage" class="font2 black">Weapon Name</label>
+                    <label for="damage" class="font2 black">Damage</label>
                 </td>
                 <td>
                     <input type="number" name="damage" class="font2 black" min="0">
                 </td>
             </tr>
-            <!-- /main -->
+            <tr class="main-table">
+                <td>
+                    <label for="range" class="font2 black">Range</label>
+                </td>
+                <td>
+                    <input type="number" name="range" class="font2 black" min="0">
+                </td>
+            </tr>
+            <tr class="main-table">
+                <td>
+                    <label for="attack_rate" class="font2 black">Attack Rate</label>
+                </td>
+                <td>
+                    <input type="number" name="attack_rate" class="font2 black" min="0">
+                </td>
+            </tr>
+            <tr class="main-table">
+                <td>
+                    <label for="ink_usage" class="font2 black">Ink Usage</label>
+                </td>
+                <td>
+                    <input type="number" name="ink_usage" step="0.01" class="font2 black" min="0">
+                </td>
+            </tr>
+            <tr class="main-table">
+                <td>
+                    <label for="speed" class="font2 black">Speed While Shooting</label>
+                </td>
+                <td>
+                    <input type="number" name="speed" class="font2 black" min="0">
+                </td>
+            </tr>
+            
 
-            <!-- sub -->
             <tr class="sub-table">
                 <td>
                     <label for="id" class="font2 black">ID</label>
@@ -161,9 +191,40 @@
                     <input type="text" name="weapon_name" class="font2 black">
                 </td>
             </tr>
-            <!-- /sub -->
+            <tr class="sub-table">
+                <td>
+                    <label for="damage" class="font2 black">Damage</label>
+                </td>
+                <td>
+                    <input type="number" name="damage" min="0" class="font2 black">
+                </td>
+            </tr>
+            <tr class="sub-table">
+                <td>
+                    <label for="ink_consumption" class="font2 black">Ink Consumption</label>
+                </td>
+                <td>
+                    <input type="number" name="ink_consumption" min="0" class="font2 black">
+                </td>
+            </tr>
+            <tr class="sub-table">
+                <td>
+                    <label for="tracking" class="font2 black">Tracking Duration</label>
+                </td>
+                <td>
+                    <input type="number" name="tracking" min="0" class="font2 black">
+                </td>
+            </tr>
+            <tr class="sub-table">
+                <td>
+                    <label for="duration" class="font2 black">Damage Duration</label>
+                </td>
+                <td>
+                    <input type="number" name="duration" min="0" step="0.5" class="font2 black">
+                </td>
+            </tr>
+            
 
-            <!-- special -->
             <tr class="special-table">
                 <td>
                     <label for="id" class="font2 black">ID</label>
@@ -180,7 +241,30 @@
                     <input type="text" name="weapon_name" class="font2 black">
                 </td>
             </tr>
-            <!-- /special -->
+            <tr class="special-table">
+                <td>
+                    <label for="damage" class="font2 black">Damage</label>
+                </td>
+                <td>
+                    <input type="number" name="damage" min="0" class="font2 black">
+                </td>
+            </tr>
+            <tr class="special-table">
+                <td>
+                    <label for="number_attacks" class="font2 black">Number of Attacks</label>
+                </td>
+                <td>
+                    <input type="number" name="number_attacks" min="0" class="font2 black">
+                </td>
+            </tr>
+            <tr class="special-table">
+                <td>
+                    <label for="duration" class="font2 black">Attack / Tracking Duration</label>
+                </td>
+                <td>
+                    <input type="number" name="duration" min="0" class="font2 black">
+                </td>
+            </tr>
 
         </table>
         <input type="submit" value="Submit" class="font2 black">

@@ -182,6 +182,11 @@ def add_weapon():
     table = request.form["table"]
     id = request.form["id"]
 
+    if update == "delete":
+        query = "DELETE FROM ? WHERE ? = ?"
+        connect_database(query, (id, ))
+
+
     weapon_name = request.form["weapon_name"]
     main_weapon = request.form["main_weapon"]
 
