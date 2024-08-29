@@ -15,13 +15,13 @@
     {% endfor %}
 
     {% if page == 1 %}
-    <a href="/all/{{total_pages}}/{{selected_weapon[0]}}"><div class="weapon-back-button font2">back</div></a>
+    <a href="/{{title}}/{{total_pages}}/{{selected_weapon[0]}}"><div class="weapon-back-button font2">back</div></a>
     {% else %}
-    <a href="/all/{{page-1}}/{{selected_weapon[0]}}"><div class="weapon-back-button font2">back</div></a>
+    <a href="/{{title}}/{{page-1}}/{{selected_weapon[0]}}"><div class="weapon-back-button font2">back</div></a>
     {% endif %}
     {% if page >= total_pages %}
-    <a href="/all/{{1}}/{{selected_weapon[0]}}"><div class="weapon-next-button font2">next</div></a>
+    <a href="/{{title}}/{{1}}/{{selected_weapon[0]}}"><div class="weapon-next-button font2">next</div></a>
     {% else %}
-    <a href="/all/{{page+1}}/{{selected_weapon[0]}}"><div class="weapon-next-button font2">next</div></a>
+    <a href="/{{title}}/{{page+1}}/{{selected_weapon[0]}}"><div class="weapon-next-button font2">next</div></a>
     {% endif %}
 </div>

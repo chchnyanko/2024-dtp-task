@@ -12,13 +12,6 @@ DB = "splatoon3.db"
 
 app.config['SECRET_KEY'] = "MyReallySecretKey"
 
-LABEL_NAMES: dict = {
-    "weapon": ["Weapon ID", "Weapon Name", "Main Weapon", "Sub Weapon", "Special Weapon", "Points for Special", "Introduced Version"],
-    "main": ["Weapon ID", "Weapon Name", "Weapon Type", "Damage", "Range", "Attack Rate", "Ink Usage", "Speed While Shooting"],
-    "sub": ["Weapon ID", "Weapon Name", "Damage", "Ink Consumption", "Tracking Duration", "Damage Duration"],
-    "special": ["Weapon ID", "Weapon Name", "Damage", "Number of Attacks", "Duration"]
-}
-
 #the number of weapons shown in 1 page
 PAGESIZE = 12 
 
@@ -174,39 +167,68 @@ def admin_login():
     return render_template("admin_login.html")
 
 
+LABEL_NAMES: dict = {
+    "weapon": ["Weapons", "WeaponID", "WeaponName", "MainWeaponID", "SubWeaponID", "SpecialWeaponID", "SpecialPoint", "VersionID"],
+    "main": ["MainWeapon", "MainWeaponID", "MainWeaponName", "WeaponType", "Damage", "Range", "AttackRate", "InkUsage", "SpeedWhileShooting"],
+    "sub": ["SubWeapon", "SubWeaponID", "SubWeaponName", "Damage", "InkConsumption", "TrackingDuration", "DamageDuration"],
+    "special": ["SpecialWeapon", "SpecialWeaponID", "SpecialWeaponName", "Damage", "NumberOfAttacks", "Duration"]
+}
+
+
 @app.post("/add_weapon")
 def add_weapon():
     '''The admin page for adding and editing data from the database'''
     
     update = request.form["update"]
     table = request.form["table"]
-    id = request.form["id"]
+    if table == "weapon":
+        id = request.form["id"]
+    else:
+        id = request.form[f"{table}-id"]
 
     if update == "delete":
-        query = "DELETE FROM ? WHERE ? = ?"
-        connect_database(query, (id, ))
+        query = f"DELETE FROM {LABEL_NAMES.get(table)[0]} WHERE {LABEL_NAMES.get(table)[1]} = ?"
+        print(query, (id, ))
+        connect_database(query, (id,))
+        return
 
+    if update == "add":
+        table_name: str
+        if table == "weapon":
+            table_name = ""
+        else:
+            table_name = table
+        row_contents: list = []
+        for i in LABEL_NAMES.get(table):
+            if i == LABEL_NAMES.get(table)[0]:
+                continue
+            if "ID" in i:
+                continue
+            row_name = f"{table_name}-{i}"
+            print(request.form[row_name])
+            row_contents.append(request.form[row_name])
+        print(row_contents)
 
-    weapon_name = request.form["weapon_name"]
-    main_weapon = request.form["main_weapon"]
+    # weapon_name = request.form["weapon_name"]
+    # main_weapon = request.form["main_weapon"]
 
-    main_weapon_id = connect_database("SELECT MainWeaponID FROM MainWeapon WHERE MainWeaponName = ?", (main_weapon,))[0][0]
-    sub_weapon = request.form["sub_weapon"]
-    sub_weapon_id = connect_database("SELECT SubWeaponID FROM SubWeapon WHERE SubWeaponName = ?", (sub_weapon,))[0][0]
-    special_weapon = request.form["special_weapon"]
-    special_weapon_id = connect_database("SELECT SpecialWeaponID FROM SpecialWeapon WHERE SpecialWeaponName = ?", (special_weapon, ))[0][0]
+    # main_weapon_id = connect_database("SELECT MainWeaponID FROM MainWeapon WHERE MainWeaponName = ?", (main_weapon,))[0][0]
+    # sub_weapon = request.form["sub_weapon"]
+    # sub_weapon_id = connect_database("SELECT SubWeaponID FROM SubWeapon WHERE SubWeaponName = ?", (sub_weapon,))[0][0]
+    # special_weapon = request.form["special_weapon"]
+    # special_weapon_id = connect_database("SELECT SpecialWeaponID FROM SpecialWeapon WHERE SpecialWeaponName = ?", (special_weapon, ))[0][0]
     
-    points = request.form["points"]
-    version = request.form["version"]
-    if update == "update":
-        query = "UPDATE Weapons SET WeaponName = ?, MainWeaponID = ?, SubWeaponID = ?, SpecialWeaponID = ?, SpecialPoint = ?, VersionID = ? WHERE weapon_id = ?"
-        connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version, id))
-    elif update == "add":
-        query = "INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID, SpecialPoint, VersionID) VALUES (?,?,?,?,?,?)"
-        connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version))
-    elif update == "delete":
-        query = "DELETE FROM Weapons WHERE weapon_id = ?"
-        connect_database(query, (id, ))
+    # points = request.form["points"]
+    # version = request.form["version"]
+    # if update == "update":
+    #     query = "UPDATE Weapons SET WeaponName = ?, MainWeaponID = ?, SubWeaponID = ?, SpecialWeaponID = ?, SpecialPoint = ?, VersionID = ? WHERE weapon_id = ?"
+    #     connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version, id))
+    # elif update == "add":
+    #     query = "INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID, SpecialPoint, VersionID) VALUES (?,?,?,?,?,?)"
+    #     connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version))
+    # elif update == "delete":
+    #     query = "DELETE FROM Weapons WHERE weapon_id = ?"
+    #     connect_database(query, (id, ))
     return redirect("/")
 
 

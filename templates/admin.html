@@ -37,18 +37,18 @@
             </tr>
             <tr class="weapon-table">
                 <td>
-                    <label for="weapon_name" class="font2 black">Weapon Name</label>
+                    <label for="WeaponName" class="font2 black">Weapon Name</label>
                 </td>
                 <td>
-                    <input type="text" name="weapon_name" class="font2 black">
+                    <input type="text" name="WeaponName" class="font2 black">
                 </td>
             </tr>
             <tr class="weapon-table">
                 <td>
-                    <label for="main_weapon" class="font2 black">Main Weapon</label>
+                    <label for="MainWeaponID" class="font2 black">Main Weapon</label>
                 </td>
                 <td>
-                    <select name="main_weapon" id="post" class="font2 black">
+                    <select name="MainWeaponID" id="post" class="font2 black">
                         <option value="">select main weapon</option>
                         {% for weapon in main_weapons %}
                         <option value="{{weapon[0]}}">{{weapon[0]}}</option>
@@ -59,10 +59,10 @@
             </tr>
             <tr class="weapon-table">
                 <td>
-                    <label for="sub_weapon" class="font2 black">Sub Weapon</label>
+                    <label for="SubWeaponID" class="font2 black">Sub Weapon</label>
                 </td>
                 <td>
-                    <select name="sub_weapon" id="post" class="font2 black">
+                    <select name="SubWeaponID" id="post" class="font2 black">
                         <option value="">select sub weapon</option>
                         {% for weapon in sub_weapons %}
                         <option value="{{weapon[0]}}">{{weapon[0]}}</option>
@@ -73,10 +73,10 @@
             </tr>
             <tr class="weapon-table">
                 <td>
-                    <label for="speical_weapon" class="font2 black">Special Weapon</label>   
+                    <label for="SpecialWeaponID" class="font2 black">Special Weapon</label>   
                 </td>
                 <td>
-                    <select name="special_weapon" id="post" class="font2 black">
+                    <select name="SpecialWeaponID" id="post" class="font2 black">
                         <option value="">select special weapon</option>
                         {% for weapon in special_weapons %}
                         <option value="{{weapon[0]}}">{{weapon[0]}}</option>
@@ -87,44 +87,44 @@
             </tr>
             <tr class="weapon-table">
                 <td>
-                    <label for="points" class="font2 black">Required Spcieal Points</label>
+                    <label for="SpecialPoint" class="font2 black">Required Spcieal Points</label>
                 </td>
                 <td>
-                    <input type="number" name="points" class="font2 black">
+                    <input type="number" name="SpecialPoint" class="font2 black">
                 </td>
             </tr>
             <tr class="weapon-table">
                 <td>
-                    <label for="version" class="font2 black">Introduced Version</label>
+                    <label for="VersionID" class="font2 black">Introduced Version</label>
                 </td>
                 <td>
-                    <input type="number" name="version" class="font2 black" min="0" max="10">
+                    <input type="number" name="VersionID" class="font2 black" min="0" max="10">
                 </td>
             </tr>
 
 
             <tr class="main-table">
                 <td>
-                    <label for="id" class="font2 black">ID</label>
+                    <label for="main-id" class="font2 black">ID</label>
                 </td>
                 <td>
-                    <input type="number" name="id" class="font2 black">
-                </td>
-            </tr>
-            <tr class="main-table">
-                <td>
-                    <label for="weapon_name" class="font2 black">Weapon Name</label>
-                </td>
-                <td>
-                    <input type="text" name="weapon_name" class="font2 black">
+                    <input type="number" name="main-id" class="font2 black">
                 </td>
             </tr>
             <tr class="main-table">
                 <td>
-                    <label for="weapon_type" class="font2 black">Weapon Type</label>
+                    <label for="main-MainWeaponName" class="font2 black">Weapon Name</label>
                 </td>
                 <td>
-                    <select name="weapon_type" id="post" class="font2 black">
+                    <input type="text" name="main-MainWeaponName" class="font2 black">
+                </td>
+            </tr>
+            <tr class="main-table">
+                <td>
+                    <label for="main-WeaponType" class="font2 black">Weapon Type</label>
+                </td>
+                <td>
+                    <select name="main-WeaponType" id="post" class="font2 black">
                         <option value="">Select Weapon Type</option>
                         {% for types in main_types %}
                         <option value="{{types[0]}}">{{types[0]}}</option>
@@ -135,134 +135,134 @@
             </tr>
             <tr class="main-table">
                 <td>
-                    <label for="damage" class="font2 black">Damage</label>
+                    <label for="main-Damage" class="font2 black">Damage</label>
                 </td>
                 <td>
-                    <input type="number" name="damage" class="font2 black" min="0">
-                </td>
-            </tr>
-            <tr class="main-table">
-                <td>
-                    <label for="range" class="font2 black">Range</label>
-                </td>
-                <td>
-                    <input type="number" name="range" class="font2 black" min="0">
+                    <input type="number" name="main-Damage" class="font2 black" min="0">
                 </td>
             </tr>
             <tr class="main-table">
                 <td>
-                    <label for="attack_rate" class="font2 black">Attack Rate</label>
+                    <label for="main-Range" class="font2 black">Range</label>
                 </td>
                 <td>
-                    <input type="number" name="attack_rate" class="font2 black" min="0">
-                </td>
-            </tr>
-            <tr class="main-table">
-                <td>
-                    <label for="ink_usage" class="font2 black">Ink Usage</label>
-                </td>
-                <td>
-                    <input type="number" name="ink_usage" step="0.01" class="font2 black" min="0">
+                    <input type="number" name="main-Range" class="font2 black" min="0">
                 </td>
             </tr>
             <tr class="main-table">
                 <td>
-                    <label for="speed" class="font2 black">Speed While Shooting</label>
+                    <label for="main-AttackRate" class="font2 black">Attack Rate</label>
                 </td>
                 <td>
-                    <input type="number" name="speed" class="font2 black" min="0">
+                    <input type="number" name="main-AttackRate" class="font2 black" min="0">
+                </td>
+            </tr>
+            <tr class="main-table">
+                <td>
+                    <label for="main-InkUsage" class="font2 black">Ink Usage</label>
+                </td>
+                <td>
+                    <input type="number" name="main-InkUsage" step="0.01" class="font2 black" min="0">
+                </td>
+            </tr>
+            <tr class="main-table">
+                <td>
+                    <label for="main-SpeedWhileShooting" class="font2 black">Speed While Shooting</label>
+                </td>
+                <td>
+                    <input type="number" name="main-SpeedWhileShooting" class="font2 black" min="0">
                 </td>
             </tr>
             
 
             <tr class="sub-table">
                 <td>
-                    <label for="id" class="font2 black">ID</label>
+                    <label for="sub-id" class="font2 black">ID</label>
                 </td>
                 <td>
-                    <input type="number" name="id" class="font2 black">
-                </td>
-            </tr>
-            <tr class="sub-table">
-                <td>
-                    <label for="weapon_name" class="font2 black">Weapon Name</label>
-                </td>
-                <td>
-                    <input type="text" name="weapon_name" class="font2 black">
+                    <input type="number" name="sub-id" class="font2 black">
                 </td>
             </tr>
             <tr class="sub-table">
                 <td>
-                    <label for="damage" class="font2 black">Damage</label>
+                    <label for="sub-weapon_name" class="font2 black">Weapon Name</label>
                 </td>
                 <td>
-                    <input type="number" name="damage" min="0" class="font2 black">
-                </td>
-            </tr>
-            <tr class="sub-table">
-                <td>
-                    <label for="ink_consumption" class="font2 black">Ink Consumption</label>
-                </td>
-                <td>
-                    <input type="number" name="ink_consumption" min="0" class="font2 black">
+                    <input type="text" name="sub-weapon_name" class="font2 black">
                 </td>
             </tr>
             <tr class="sub-table">
                 <td>
-                    <label for="tracking" class="font2 black">Tracking Duration</label>
+                    <label for="sub-damage" class="font2 black">Damage</label>
                 </td>
                 <td>
-                    <input type="number" name="tracking" min="0" class="font2 black">
+                    <input type="number" name="sub-damage" min="0" class="font2 black">
                 </td>
             </tr>
             <tr class="sub-table">
                 <td>
-                    <label for="duration" class="font2 black">Damage Duration</label>
+                    <label for="sub-ink_consumption" class="font2 black">Ink Consumption</label>
                 </td>
                 <td>
-                    <input type="number" name="duration" min="0" step="0.5" class="font2 black">
+                    <input type="number" name="sub-ink_consumption" min="0" class="font2 black">
+                </td>
+            </tr>
+            <tr class="sub-table">
+                <td>
+                    <label for="sub-tracking" class="font2 black">Tracking Duration</label>
+                </td>
+                <td>
+                    <input type="number" name="sub-tracking" min="0" class="font2 black">
+                </td>
+            </tr>
+            <tr class="sub-table">
+                <td>
+                    <label for="sub-duration" class="font2 black">Damage Duration</label>
+                </td>
+                <td>
+                    <input type="number" name="sub-duration" min="0" step="0.5" class="font2 black">
                 </td>
             </tr>
             
 
             <tr class="special-table">
                 <td>
-                    <label for="id" class="font2 black">ID</label>
+                    <label for="special-id" class="font2 black">ID</label>
                 </td>
                 <td>
-                    <input type="number" name="id" class="font2 black">
-                </td>
-            </tr>
-            <tr class="special-table">
-                <td>
-                    <label for="weapon_name" class="font2 black">Weapon Name</label>
-                </td>
-                <td>
-                    <input type="text" name="weapon_name" class="font2 black">
+                    <input type="number" name="special-id" class="font2 black">
                 </td>
             </tr>
             <tr class="special-table">
                 <td>
-                    <label for="damage" class="font2 black">Damage</label>
+                    <label for="special-weapon_name" class="font2 black">Weapon Name</label>
                 </td>
                 <td>
-                    <input type="number" name="damage" min="0" class="font2 black">
-                </td>
-            </tr>
-            <tr class="special-table">
-                <td>
-                    <label for="number_attacks" class="font2 black">Number of Attacks</label>
-                </td>
-                <td>
-                    <input type="number" name="number_attacks" min="0" class="font2 black">
+                    <input type="text" name="special-weapon_name" class="font2 black">
                 </td>
             </tr>
             <tr class="special-table">
                 <td>
-                    <label for="duration" class="font2 black">Attack / Tracking Duration</label>
+                    <label for="special-damage" class="font2 black">Damage</label>
                 </td>
                 <td>
-                    <input type="number" name="duration" min="0" class="font2 black">
+                    <input type="number" name="special-damage" min="0" class="font2 black">
+                </td>
+            </tr>
+            <tr class="special-table">
+                <td>
+                    <label for="special-number_attacks" class="font2 black">Number of Attacks</label>
+                </td>
+                <td>
+                    <input type="number" name="special-number_attacks" min="0" class="font2 black">
+                </td>
+            </tr>
+            <tr class="special-table">
+                <td>
+                    <label for="special-duration" class="font2 black">Attack / Tracking Duration</label>
+                </td>
+                <td>
+                    <input type="number" name="special-duration" min="0" class="font2 black">
                 </td>
             </tr>
 
