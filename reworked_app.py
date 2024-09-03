@@ -167,6 +167,26 @@ def admin_login():
     return render_template("admin_login.html")
 
 
+def get_id(id, table):
+    name: str = ""
+    if table == "MainWeaponID":
+        query = f"SELECT MainWeaponID FROM MainWeapon WHERE MainWeaponName = '{id}';"
+        name = connect_database(query)[0][0]
+    elif table == "SubWeaponID":
+        query = f"SELECT SubWeaponID FROM SubWeapon WHERE SubWeaponName = '{id}';"
+        name = connect_database(query)[0][0]
+    elif table == "SpecialWeaponID":
+        query = f"SELECT SpecialWeaponID FROM SpecialWeapon WHERE SpecialWeaponName = '{id}';"
+        name = connect_database(query)[0][0]
+    elif table == "VersionID":
+        name = id
+    elif table == "WeaponType":
+        query = f"SELECT WeaponTypeID FROM WeaponTypes WHERE WeaponType = '{id}'"
+        name = connect_database(query)[0][0]
+    return name
+
+
+
 LABEL_NAMES: dict = {
     "weapon": ["Weapons", "WeaponID", "WeaponName", "MainWeaponID", "SubWeaponID", "SpecialWeaponID", "SpecialPoint", "VersionID"],
     "main": ["MainWeapon", "MainWeaponID", "MainWeaponName", "WeaponType", "Damage", "Range", "AttackRate", "InkUsage", "SpeedWhileShooting"],
@@ -188,26 +208,68 @@ def add_weapon():
 
     if update == "delete":
         query = f"DELETE FROM {LABEL_NAMES.get(table)[0]} WHERE {LABEL_NAMES.get(table)[1]} = ?"
-        print(query, (id, ))
         connect_database(query, (id,))
-        return
-
-    if update == "add":
+    else: 
         table_name: str
         if table == "weapon":
             table_name = ""
         else:
-            table_name = table
-        row_contents: list = []
-        for i in LABEL_NAMES.get(table):
-            if i == LABEL_NAMES.get(table)[0]:
-                continue
-            if "ID" in i:
-                continue
-            row_name = f"{table_name}-{i}"
-            print(request.form[row_name])
-            row_contents.append(request.form[row_name])
-        print(row_contents)
+            table_name = f"{table}-"
+
+        if update == "add":
+            row_contents: list = []
+            for i in LABEL_NAMES.get(table):
+                if i == LABEL_NAMES.get(table)[0]:
+                    continue
+                if i == LABEL_NAMES.get(table)[1]:
+                    continue
+                row_name = f"{table_name}{i}"
+                if "ID" in i or i == "WeaponType":
+                    name = get_id(request.form[row_name], i)
+                    row_contents.append(name)
+                    continue
+                else:
+                    row_contents.append(request.form[row_name])
+            query = f"INSERT INTO {LABEL_NAMES.get(table)[0]} ({str(LABEL_NAMES.get(table)).replace(f"['{LABEL_NAMES.get(table)[0]}', '{LABEL_NAMES.get(table)[1]}', ", "").replace("]", "")}) VALUES ({str(row_contents).replace("[", "").replace("]", "")});"
+            connect_database(query)
+
+        elif update == "update":
+            row_contents: list = []
+            for i in LABEL_NAMES.get(table):
+                if i == LABEL_NAMES.get(table)[0]:
+                    continue
+                if i == LABEL_NAMES.get(table)[1]:
+                    continue
+                row_name = f"{table_name}{i}"
+                if "ID" in i or i == "WeaponType":
+                    print(request.form[row_name])
+                    if request.form[row_name] != "":
+                        name = get_id(request.form[row_name], i)
+                        row_contents.append(row_name)
+                        row_contents.append(name)
+                else:
+                    if request.form[row_name] != None:
+                        row_contents.append(row_name)
+                        row_contents.append(request.form[row_name])
+            print(row_contents)
+            if len(row_contents) > 0:
+                stuff: str = ""
+                for i in range(int(len(row_contents) / 2)):
+                    stuff += str(row_contents[i * 2])
+                    stuff += " = '"
+                    stuff += str(row_contents[i * 2 + 1])
+                    if i == int(len(row_contents) / 2):
+                        stuff += "'"
+                        continue
+                    stuff += "', "
+                print(stuff)
+                query = f"UPDATE {LABEL_NAMES.get(table)[0]} SET {stuff} WHERE {LABEL_NAMES.get(table)[1]} = '{id}';"
+                print(query)
+                connect_database(query)
+                
+        
+
+
 
     # weapon_name = request.form["weapon_name"]
     # main_weapon = request.form["main_weapon"]

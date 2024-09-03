@@ -9,8 +9,8 @@
         <a href="/all/{{page}}/0"><img src="/static/main_weapon/{{weapon[1]}}.png" alt="{{weapon[1]}}" class="weapon-img" onerror="this.onerror=null;this.src='/static/other_images/loading.gif'"></a>
         {% endif %}
         <div class="all-yellow_bar">
-            <img src="/static/sub_weapon/{{weapon[3]}}.png" alt="{{weapon[3]}}" class="all-sub-img">
-            <img src="/static/special_weapon/{{weapon[4]}}.png" alt="{{weapon[4]}}" class="all-special-img">
+            <img src="/static/sub_weapon/{{weapon[3]}}.png" alt="{{weapon[3]}}" class="all-sub-img" onerror="this.onerror=null;this.src='/static/other_images/loading.gif'">
+            <img src="/static/special_weapon/{{weapon[4]}}.png" alt="{{weapon[4]}}" class="all-special-img" onerror="this.onerror=null;this.src='/static/other_images/loading.gif'">
         </div>
     </div>
     {% endfor %}
@@ -34,14 +34,14 @@
         </div>
     </div>
     <div class="weapon-data-grid">
-        <a href="/main/{{selected_weapon[7]}}/{{selected_weapon[2]}}"><img src="/static/main_weapon/{{selected_weapon[1]}}.png" alt="{{selected_weapon[1]}}" class="weapon-data-img"></a>
+        <a href="/main/{{selected_weapon[7]}}/{{selected_weapon[2]}}"><img src="/static/main_weapon/{{selected_weapon[1]}}.png" alt="{{selected_weapon[1]}}" class="weapon-data-img" onerror="this.onerror=null;this.src='/static/other_images/splatoon3_loading.gif'"></a>
         <div>
             <a href="/sub/1/{{selected_weapon[3]}}"><div class="all-data-black-box">
-                <img src="/static/sub_weapon/{{selected_weapon[3]}}.png" alt="{{selected_weapon[3]}}" class="all-data-sub-img">
+                <img src="/static/sub_weapon/{{selected_weapon[3]}}.png" alt="{{selected_weapon[3]}}" class="all-data-sub-img" onerror="this.onerror=null;this.src='/static/other_images/splatoon3_loading.gif'">
                 <span class="all-data-text font2">{{selected_weapon[8]}}</span>
             </div></a>
             <a href="/special/1/{{selected_weapon[4]}}"><div class="all-data-black-box">
-                <img src="/static/special_weapon/{{selected_weapon[4]}}.png" alt="{{selected_weapon[4]}}" class="all-data-special-img">
+                <img src="/static/special_weapon/{{selected_weapon[4]}}.png" alt="{{selected_weapon[4]}}" class="all-data-special-img" onerror="this.onerror=null;this.src='/static/other_images/splatoon3_loading.gif'">
                 <span class="all-data-text font2">{{selected_weapon[9]}}</span>
             </div></a>
             <p class="all-data-version font2">Introduced Version: {{selected_weapon[6]}}</p>
