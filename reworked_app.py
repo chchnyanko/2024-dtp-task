@@ -168,7 +168,9 @@ def admin_login():
 
 
 def get_id(id, table):
+    '''Used to get values from the id for adding and updating data in the database'''
     name: str = ""
+    #get the value from table for each id
     if table == "MainWeaponID":
         query = f"SELECT MainWeaponID FROM MainWeapon WHERE MainWeaponName = '{id}';"
         name = connect_database(query)[0][0]
@@ -183,10 +185,11 @@ def get_id(id, table):
     elif table == "WeaponType":
         query = f"SELECT WeaponTypeID FROM WeaponTypes WHERE WeaponType = '{id}'"
         name = connect_database(query)[0][0]
+    #return the name
     return name
 
 
-
+# the names of each of the columns in the database
 LABEL_NAMES: dict = {
     "weapon": ["Weapons", "WeaponID", "WeaponName", "MainWeaponID", "SubWeaponID", "SpecialWeaponID", "SpecialPoint", "VersionID"],
     "main": ["MainWeapon", "MainWeaponID", "MainWeaponName", "WeaponType", "Damage", "Range", "AttackRate", "InkUsage", "SpeedWhileShooting"],
@@ -199,98 +202,103 @@ LABEL_NAMES: dict = {
 def add_weapon():
     '''The admin page for adding and editing data from the database'''
     
-    update = request.form["update"]
-    table = request.form["table"]
+    update = request.form["update"] #if the user is updating, adding or removing data
+    table = request.form["table"] #the table that is being edited
+
+    #getting the name of the id
     if table == "weapon":
         id = request.form["id"]
     else:
         id = request.form[f"{table}-id"]
 
+    #deleting data
     if update == "delete":
         query = f"DELETE FROM {LABEL_NAMES.get(table)[0]} WHERE {LABEL_NAMES.get(table)[1]} = ?"
         connect_database(query, (id,))
-    else: 
+    else:
+        #get the name suffix used for each table
         table_name: str
         if table == "weapon":
             table_name = ""
         else:
             table_name = f"{table}-"
 
+        #adding data
         if update == "add":
+            #make a list to store all of the stuff that is getting added
             row_contents: list = []
             for i in LABEL_NAMES.get(table):
+                #don't need the table name or the id
                 if i == LABEL_NAMES.get(table)[0]:
                     continue
                 if i == LABEL_NAMES.get(table)[1]:
                     continue
+                #the name used in the html for that row of data
                 row_name = f"{table_name}{i}"
+                #if it is an id, use the get_id() function to get the data
                 if "ID" in i or i == "WeaponType":
                     name = get_id(request.form[row_name], i)
                     row_contents.append(name)
                     continue
+                #else, add the data
                 else:
                     row_contents.append(request.form[row_name])
-            query = f"INSERT INTO {LABEL_NAMES.get(table)[0]} ({str(LABEL_NAMES.get(table)).replace(f"['{LABEL_NAMES.get(table)[0]}', '{LABEL_NAMES.get(table)[1]}', ", "").replace("]", "")}) VALUES ({str(row_contents).replace("[", "").replace("]", "")});"
+            #create a list with the names of the columns as a string
+            data: list = []
+            for i in range(len(LABEL_NAMES.get(table))):
+                if i < 2:
+                    continue
+                data.append(LABEL_NAMES.get(table)[i])
+            datastr: str = str(data)
+            datastr = datastr.replace("[", "").replace("]", "")
+            #get the data as a string
+            values = str(row_contents)
+            values = values.replace("[", "").replace("]", "")
+            #add the data to the database
+            query = f"INSERT INTO {LABEL_NAMES.get(table)[0]} ({datastr}) VALUES ({values});"
             connect_database(query)
-
+        
+        #updating data
         elif update == "update":
+            #make a list to store the stuff that is getting update
             row_contents: list = []
             for i in LABEL_NAMES.get(table):
+                #don't get the table name or the id
                 if i == LABEL_NAMES.get(table)[0]:
                     continue
                 if i == LABEL_NAMES.get(table)[1]:
                     continue
+                #the name used in the html for that row of data
                 row_name = f"{table_name}{i}"
+                #if it is an id, use the get_id() function to get the data
                 if "ID" in i or i == "WeaponType":
-                    print(request.form[row_name])
+                    #only do stuff if there is date in the row
                     if request.form[row_name] != "":
                         name = get_id(request.form[row_name], i)
                         row_contents.append(row_name)
                         row_contents.append(name)
+                        continue
+                #else, if there is data in the row add that to the row_contents list
                 else:
-                    if request.form[row_name] != None:
+                    if request.form[row_name] != "":
                         row_contents.append(row_name)
                         row_contents.append(request.form[row_name])
-            print(row_contents)
+            #if there is stuff that is getting updated
             if len(row_contents) > 0:
+                #create a string of stuff that is getting updated
                 stuff: str = ""
                 for i in range(int(len(row_contents) / 2)):
+                    #in the string add each table name and then the data with = and , inbetween to make the proper query
                     stuff += str(row_contents[i * 2])
                     stuff += " = '"
                     stuff += str(row_contents[i * 2 + 1])
-                    if i == int(len(row_contents) / 2):
+                    if i == int(len(row_contents) / 2) - 1:
                         stuff += "'"
                         continue
                     stuff += "', "
-                print(stuff)
+                #update the data
                 query = f"UPDATE {LABEL_NAMES.get(table)[0]} SET {stuff} WHERE {LABEL_NAMES.get(table)[1]} = '{id}';"
-                print(query)
                 connect_database(query)
-                
-        
-
-
-
-    # weapon_name = request.form["weapon_name"]
-    # main_weapon = request.form["main_weapon"]
-
-    # main_weapon_id = connect_database("SELECT MainWeaponID FROM MainWeapon WHERE MainWeaponName = ?", (main_weapon,))[0][0]
-    # sub_weapon = request.form["sub_weapon"]
-    # sub_weapon_id = connect_database("SELECT SubWeaponID FROM SubWeapon WHERE SubWeaponName = ?", (sub_weapon,))[0][0]
-    # special_weapon = request.form["special_weapon"]
-    # special_weapon_id = connect_database("SELECT SpecialWeaponID FROM SpecialWeapon WHERE SpecialWeaponName = ?", (special_weapon, ))[0][0]
-    
-    # points = request.form["points"]
-    # version = request.form["version"]
-    # if update == "update":
-    #     query = "UPDATE Weapons SET WeaponName = ?, MainWeaponID = ?, SubWeaponID = ?, SpecialWeaponID = ?, SpecialPoint = ?, VersionID = ? WHERE weapon_id = ?"
-    #     connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version, id))
-    # elif update == "add":
-    #     query = "INSERT INTO Weapons (WeaponName, MainWeaponID, SubWeaponID, SpecialWeaponID, SpecialPoint, VersionID) VALUES (?,?,?,?,?,?)"
-    #     connect_database(query, (weapon_name, main_weapon_id, sub_weapon_id, special_weapon_id, points, version))
-    # elif update == "delete":
-    #     query = "DELETE FROM Weapons WHERE weapon_id = ?"
-    #     connect_database(query, (id, ))
     return redirect("/")
 
 
@@ -298,6 +306,7 @@ def add_weapon():
 def signup():
     '''The admin page for adding admin users'''
     if request.method == "POST":
+        #add the username and hashed password to the database
         username = request.form["username"]
         password = request.form["password"]
         hashed_password = generate_password_hash(password)
