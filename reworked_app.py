@@ -1,19 +1,17 @@
 '''Splatoon 3 wiki'''
 import sqlite3
 from math import ceil
-from flask import Flask, render_template, request, redirect, flash
-
-
+from flask import Flask, render_template, request, redirect, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
 DB = "splatoon3.db"
 
-app.config['SECRET_KEY'] = "MyReallySecretKey"
+app.config['SECRET_KEY'] = "levipleasestophacking"
 
 #the number of weapons shown in 1 page
-PAGESIZE = 12 
+PAGESIZE = 12
 
 
 def connect_database(query, id=None):
@@ -42,7 +40,7 @@ def select_weapon(query, weapon_id):
     weapon = connect_database(query, weapon_id)
     try:
         return weapon[0]
-    except:
+    except IndexError:
         return (0, 0)
 
 
@@ -142,6 +140,18 @@ def weapons(page, weapon_id):
 @app.route("/admin_login", methods=["GET", "POST"])
 def admin_login():
     '''The admin page for the admin login'''
+    if session.get("akashability"):
+        main_query = "SELECT MainWeaponName FROM MainWeapon"
+        mains = connect_database(main_query)
+        sub_query = "SELECT SubWeaponName FROM SubWeapon"
+        subs = connect_database(sub_query)
+        speical_query = "SELECT SpecialWeaponName FROM SpecialWeapon"
+        specials = connect_database(speical_query)
+        type_query = "SELECT WeaponType FROM WeaponTypes"
+        main_types = connect_database(type_query)
+        
+        return render_template("admin.html", main_weapons=mains, sub_weapons=subs, special_weapons=specials, main_types=main_types)
+   
     try:
         if request.method == "POST":
             #get the inputted username and password
@@ -151,6 +161,7 @@ def admin_login():
             correct_password = connect_database(query, (username,))[0][0]
             #check is the inputted password is the same as the correct password
             if check_password_hash(correct_password, password):
+                session["akashability"] = True
                 #get the names of all of the weapons
                 main_query = "SELECT MainWeaponName FROM MainWeapon"
                 mains = connect_database(main_query)
@@ -160,8 +171,9 @@ def admin_login():
                 specials = connect_database(speical_query)
                 type_query = "SELECT WeaponType FROM WeaponTypes"
                 main_types = connect_database(type_query)
+                
                 return render_template("admin.html", main_weapons=mains, sub_weapons=subs, special_weapons=specials, main_types=main_types)
-    except:
+    except IndexError:
         #if the inputted username or password doesn't match or exist, flash the message
         flash("Username or Password is Incorrect")
     return render_template("admin_login.html")
@@ -201,7 +213,6 @@ LABEL_NAMES: dict = {
 @app.post("/add_weapon")
 def add_weapon():
     '''The admin page for adding and editing data from the database'''
-    
     update = request.form["update"] #if the user is updating, adding or removing data
     table = request.form["table"] #the table that is being edited
 
@@ -241,8 +252,7 @@ def add_weapon():
                     row_contents.append(name)
                     continue
                 #else, add the data
-                else:
-                    row_contents.append(request.form[row_name])
+                row_contents.append(request.form[row_name])
             #create a list with the names of the columns as a string
             data: list = []
             for i in range(len(LABEL_NAMES.get(table))):
@@ -257,7 +267,7 @@ def add_weapon():
             #add the data to the database
             query = f"INSERT INTO {LABEL_NAMES.get(table)[0]} ({datastr}) VALUES ({values});"
             connect_database(query)
-        
+
         #updating data
         elif update == "update":
             #make a list to store the stuff that is getting update
@@ -288,7 +298,7 @@ def add_weapon():
                 #create a string of stuff that is getting updated
                 stuff: str = ""
                 for i in range(int(len(row_contents) / 2)):
-                    #in the string add each table name and then the data with = and , inbetween to make the proper query
+                    #in the string concatenate table name and then the data with = and , inbetween to make the proper query
                     stuff += str(row_contents[i * 2])
                     stuff += " = '"
                     stuff += str(row_contents[i * 2 + 1])
@@ -329,3 +339,4 @@ def page_not_found(e):
 
 if __name__ == "__main__":
     app.run(debug=True)
+    session["akashability"] = False

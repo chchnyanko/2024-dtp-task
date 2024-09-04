@@ -1,3 +1,5 @@
+'''This file is not used please use reworked_app.py instead'''
+
 from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
 from math import ceil
