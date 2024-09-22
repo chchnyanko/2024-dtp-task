@@ -1,7 +1,7 @@
 '''Splatoon 3 wiki'''
 import sqlite3
 from math import ceil
-from flask import Flask, render_template, request, redirect, flash, session
+from flask import Flask, render_template, redirect, flash, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
