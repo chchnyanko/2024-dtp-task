@@ -241,7 +241,7 @@ a :hover {
 
 /* admin */
 .weapon-table {
-    display: block;
+    display: table-row;
 }
 .main-table {
     display: none;

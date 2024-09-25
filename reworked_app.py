@@ -151,7 +151,7 @@ def admin_login():
         main_types = connect_database(type_query)
         
         return render_template("admin.html", main_weapons=mains, sub_weapons=subs, special_weapons=specials, main_types=main_types)
-   
+
     try:
         if request.method == "POST":
             #get the inputted username and password
@@ -171,7 +171,6 @@ def admin_login():
                 specials = connect_database(speical_query)
                 type_query = "SELECT WeaponType FROM WeaponTypes"
                 main_types = connect_database(type_query)
-                
                 return render_template("admin.html", main_weapons=mains, sub_weapons=subs, special_weapons=specials, main_types=main_types)
     except IndexError:
         #if the inputted username or password doesn't match or exist, flash the message
@@ -319,7 +318,7 @@ def signup():
         #add the username and hashed password to the database
         username = request.form["username"]
         password = request.form["password"]
-        hashed_password = generate_password_hash(password)
+        hashed_password = generate_password_hash(password, salt_length=8)
         query = "INSERT INTO Users (Username, Password) VALUES (?,?)"
         connect_database(query, (username, hashed_password))
     return render_template("signup.html")
