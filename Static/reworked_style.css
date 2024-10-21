@@ -240,15 +240,15 @@ a :hover {
 }
 
 /* admin */
-.weapon-table {
+.weapontable {
     display: table-row;
 }
-.main-table {
+.maintable {
     display: none;
 }
-.sub-table {
+.subtable {
     display: none;
 }
-.special-table {
+.specialtable {
     display: none;
 }

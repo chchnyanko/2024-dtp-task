@@ -17,7 +17,7 @@ function change_table() {
 }
 
 function update_labels() {
-    let hi = document.getElementsByClassName(String(table.value + "-table"));
+    let hi = document.getElementsByClassName(String(table.value + "table"));
     let bye = document.getElementsByTagName("tr")
     for(let i = 1; i < bye.length; i ++){
         bye[i].style.display = "none"

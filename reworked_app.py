@@ -145,8 +145,8 @@ def admin_login():
         mains = connect_database(main_query)
         sub_query = "SELECT SubWeaponName FROM SubWeapon"
         subs = connect_database(sub_query)
-        speical_query = "SELECT SpecialWeaponName FROM SpecialWeapon"
-        specials = connect_database(speical_query)
+        special_query = "SELECT SpecialWeaponName FROM SpecialWeapon"
+        specials = connect_database(special_query)
         type_query = "SELECT WeaponType FROM WeaponTypes"
         main_types = connect_database(type_query)
         
@@ -215,11 +215,14 @@ def add_weapon():
     update = request.form["update"] #if the user is updating, adding or removing data
     table = request.form["table"] #the table that is being edited
 
+    if request.method != 'POST':
+        return render_template("/admin_login")
+
     #getting the name of the id
     if table == "weapon":
         id = request.form["id"]
     else:
-        id = request.form[f"{table}-id"]
+        id = request.form[f"{table}id"]
 
     #deleting data
     if update == "delete":
@@ -231,7 +234,7 @@ def add_weapon():
         if table == "weapon":
             table_name = ""
         else:
-            table_name = f"{table}-"
+            table_name = f"{table}"
 
         #adding data
         if update == "add":
@@ -289,6 +292,7 @@ def add_weapon():
                         continue
                 #else, if there is data in the row add that to the row_contents list
                 else:
+                    print("row", request.form)
                     if request.form[row_name] != "":
                         row_contents.append(row_name)
                         row_contents.append(request.form[row_name])
@@ -298,13 +302,14 @@ def add_weapon():
                 stuff: str = ""
                 for i in range(int(len(row_contents) / 2)):
                     #in the string concatenate table name and then the data with = and , inbetween to make the proper query
-                    stuff += str(row_contents[i * 2])
+                    stuff += str(row_contents[i * 2]).replace(table_name, "")
                     stuff += " = '"
                     stuff += str(row_contents[i * 2 + 1])
                     if i == int(len(row_contents) / 2) - 1:
                         stuff += "'"
                         continue
                     stuff += "', "
+                print(stuff)
                 #update the data
                 query = f"UPDATE {LABEL_NAMES.get(table)[0]} SET {stuff} WHERE {LABEL_NAMES.get(table)[1]} = '{id}';"
                 connect_database(query)
@@ -314,6 +319,8 @@ def add_weapon():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     '''The admin page for adding admin users'''
+    if not "akashability" in session:
+        return render_template("/home.html")
     if request.method == "POST":
         #add the username and hashed password to the database
         username = request.form["username"]
